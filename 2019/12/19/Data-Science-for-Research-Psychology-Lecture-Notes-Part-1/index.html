@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Berkeley Course PSYCH101-D Data Science for Research Psychology Lecture Notes Part 1IntroductionThis is my lecture notes for UC Berkeley course Data Science for Research Psychology instructed by Profe">
+<meta name="keywords" content="Data Science,Berkeley Course">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Data-Science-for-Research-Psychology-Lecture-Notes-Part-1">
+<meta property="og:url" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-1/index.html">
+<meta property="og:site_name" content="Xiao Liu&#39;s Blog">
+<meta property="og:description" content="Berkeley Course PSYCH101-D Data Science for Research Psychology Lecture Notes Part 1IntroductionThis is my lecture notes for UC Berkeley course Data Science for Research Psychology instructed by Profe">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-1/Bay.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-1/截屏2019-10-29下午1.11.00.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-1/截屏2019-10-29下午1.15.05.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-1/截屏2019-10-29下午1.15.24.png">
+<meta property="og:updated_time" content="2019-12-19T20:19:50.512Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Data-Science-for-Research-Psychology-Lecture-Notes-Part-1">
+<meta name="twitter:description" content="Berkeley Course PSYCH101-D Data Science for Research Psychology Lecture Notes Part 1IntroductionThis is my lecture notes for UC Berkeley course Data Science for Research Psychology instructed by Profe">
+<meta name="twitter:image" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-1/Bay.png">
+  <link rel="canonical" href="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Data-Science-for-Research-Psychology-Lecture-Notes-Part-1 | Xiao Liu's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xiao Liu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+        
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-photos">
+      
+    
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>Photos</a>
+
+  </li>
+      
+    
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiao Liu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiao Liu's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            Data-Science-for-Research-Psychology-Lecture-Notes-Part-1
+            
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-12-19 12:01:43 / Modified: 12:19:50" itemprop="dateCreated datePublished" datetime="2019-12-19T12:01:43-08:00">2019-12-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/English-Articles/" itemprop="url" rel="index">
+                    <span itemprop="name">English Articles</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Lecture-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">Lecture Notes</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-1/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Berkeley-Course-PSYCH101-D-Data-Science-for-Research-Psychology-Lecture-Notes-Part-1"><a href="#Berkeley-Course-PSYCH101-D-Data-Science-for-Research-Psychology-Lecture-Notes-Part-1" class="headerlink" title="Berkeley Course PSYCH101-D Data Science for Research Psychology Lecture Notes Part 1"></a>Berkeley Course PSYCH101-D Data Science for Research Psychology Lecture Notes Part 1</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This is my lecture notes for UC Berkeley course <a href="https://charlesfrye.github.io/psych101d/" target="_blank" rel="noopener">Data Science for Research Psychology</a> instructed by Professor <a href="https://charlesfrye.github.io/about/" target="_blank" rel="noopener">Charles Frye</a>. Most of the content showed following is from this course’s lecture slides with some of my understanding. You can check the original slides at <a href="https://charlesfrye.github.io/psych101d/" target="_blank" rel="noopener">here</a>. If there are any copyright issues please contact me: haroldliuj@gmail.com.</p><a id="more"></a>
+<p>There are some Chinese in this post, since I think my native language can explain those point more accurately. If you can understand Chinese, that’s great. If you can’t, those content won’t inhibit you from learning the whole picture. Feel free to translate it with Google!</p>
+<p>Have a nice trip!</p>
+<h2 id="Lecture-02-Probability-and-Statistics"><a href="#Lecture-02-Probability-and-Statistics" class="headerlink" title="Lecture 02 Probability and Statistics"></a>Lecture 02 Probability and Statistics</h2><h3 id="1-Probability"><a href="#1-Probability" class="headerlink" title="1. Probability"></a>1. Probability</h3><ul>
+<li>A measure quantifying the likelihood that events will occur</li>
+</ul>
+<h3 id="2-Probability-Distributions"><a href="#2-Probability-Distributions" class="headerlink" title="2. Probability Distributions"></a>2. Probability Distributions</h3><h4 id="1-Discrete-Distributions"><a href="#1-Discrete-Distributions" class="headerlink" title="1. Discrete Distributions"></a>1. Discrete Distributions</h4><ul>
+<li>Discrete distributions don’t need to have a finite number of observable values</li>
+</ul>
+<h4 id="2-Continuous-Distributions"><a href="#2-Continuous-Distributions" class="headerlink" title="2. Continuous Distributions"></a>2. Continuous Distributions</h4><ul>
+<li>Density function</li>
+</ul>
+<h3 id="3-Statistics"><a href="#3-Statistics" class="headerlink" title="3. Statistics"></a>3. Statistics</h3><h4 id="1-Purposes"><a href="#1-Purposes" class="headerlink" title="1. Purposes"></a>1. Purposes</h4><ol>
+<li>Descriptions or summarizations<ul>
+<li>When we have the entire population of interest, all statistics is descriptive </li>
+</ul>
+</li>
+<li>Inference or moving beyond</li>
+</ol>
+<h4 id="2-Frequently-used-statistics"><a href="#2-Frequently-used-statistics" class="headerlink" title="2. Frequently used statistics"></a>2. Frequently used statistics</h4><ol>
+<li>Mean</li>
+<li>Median</li>
+<li>Variance</li>
+<li>Standard Deviation</li>
+<li>Skew (-:right, +:left)</li>
+</ol>
+<h3 id="4-Law-of-Large-Numbers"><a href="#4-Law-of-Large-Numbers" class="headerlink" title="4. Law of Large Numbers"></a>4. Law of Large Numbers</h3><ul>
+<li>The valuse of descriptive statistic on a random sample gets closer to the value of that descripitive statistic</li>
+<li>在多次重复实验的情况下 事件的概率越等与其出现的频率</li>
+</ul>
+<h3 id="5-Bootstrapping"><a href="#5-Bootstrapping" class="headerlink" title="5. Bootstrapping"></a>5. Bootstrapping</h3><p>Since the statistics are varied after each sampling operation. We need some ways to measure the uncertainty of the statistics. The most easy way to do this is get more data and qunatify the uncertainty using intervals.</p>
+<h4 id="1-Confidence-Interval"><a href="#1-Confidence-Interval" class="headerlink" title="1. Confidence Interval"></a>1. Confidence Interval</h4><ul>
+<li>A confidence interval is any interval-valued statistic that has the property that for some known fraction of possible samples(这个区间有x%的概率包含总体的统计量)</li>
+<li>when the 95% confidence interval is <code>[0, 1]</code>, we are 95% sure that the value of the statistic on the true distribution is inside that interval.</li>
+</ul>
+<h4 id="2-Steps"><a href="#2-Steps" class="headerlink" title="2. Steps"></a>2. Steps</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bootstrap_stat</span><span class="params">(s, stat_fun, n_boots)</span>:</span></span><br><span class="line">    list = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, n_boots): <span class="comment">#统计量的样本数</span></span><br><span class="line">        sample = s.sample(frac=<span class="number">1</span>, replace=<span class="literal">True</span>) <span class="comment">#从已知的数据中重新抽样</span></span><br><span class="line">        list.append(stat_fun(sample))<span class="comment">#计算统计量 然后添加到list</span></span><br><span class="line">    <span class="keyword">return</span> list <span class="comment">#此list用于以后数据分析(e.g. confidence Interval)</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-Understanding-Bootstrapping"><a href="#3-Understanding-Bootstrapping" class="headerlink" title="3. Understanding Bootstrapping"></a>3. Understanding Bootstrapping</h4><p>Bootstrapping是判断统计量的可信度的一种方法，因为统计量是从抽样得到的，会随着每一次抽样的不同而不同，但是根据大数定律，在获得足够多的统计量的样本后就能找到其真实的值，所以Bootstrapping 就是一种借用已有的数据通过重新抽样的方式来获取大量的统计量</p>
+<h2 id="Lecture-03-Models-and-Random-Variables"><a href="#Lecture-03-Models-and-Random-Variables" class="headerlink" title="Lecture 03 Models and Random Variables"></a>Lecture 03 Models and Random Variables</h2><h3 id="1-Models"><a href="#1-Models" class="headerlink" title="1. Models"></a>1. Models</h3><ul>
+<li>Unlike bootstrapping, models will genearte samples that don’t look ecxactly like data we observed</li>
+</ul>
+<h3 id="2-Frequently-used-distributions"><a href="#2-Frequently-used-distributions" class="headerlink" title="2. Frequently used distributions"></a>2. Frequently used distributions</h3><h4 id="1-Discrete"><a href="#1-Discrete" class="headerlink" title="1. Discrete"></a>1. Discrete</h4><ol>
+<li><p>Binomial (二项分布)</p>
+<ul>
+<li>$f(x|n, p) = C_n^xp^x(1-p)^{n-x}$</li>
+</ul>
+</li>
+<li><p>Bernoulli(两点分布)</p>
+<ul>
+<li><p>$f(x|p)=p^x(1-p)^{1-x}$</p>
+</li>
+<li><p>二项分布是两点分布多次实验后的结果</p>
+</li>
+</ul>
+</li>
+<li><p>Possion</p>
+<ul>
+<li>$f(x|\mu)=\frac{e^{-\mu}\mu^x}{x!}$</li>
+<li>Often used to model the number of events occurring in a fixed period of time when the times at which events occur are independent.</li>
+<li>当二项分布n很大p很小时，近似服从泊松分布</li>
+<li>泊松分布适合于描述单位时间（或空间）内随机事件发生的次数。如某一服务设施在一定时间内到达的人数，电话交换机接到呼叫的次数，汽车站台的候客人数，机器出现的故障数，自然灾害发生的次数，一块产品上的缺陷数，显微镜下单位分区内的细菌分布数等等。</li>
+</ul>
+</li>
+<li><p>DiscreteUniform(均匀分布)</p>
+<ul>
+<li>$f(x|lower, upper)=\frac{1}{upper-lower+1}$</li>
+</ul>
+</li>
+<li><p>Categorical(分布列) 参数 p概率和要为1</p>
+<ul>
+<li>$f(x|p) = p_x$</li>
+</ul>
+</li>
+</ol>
+<h4 id="2-Continuous"><a href="#2-Continuous" class="headerlink" title="2. Continuous"></a>2. Continuous</h4><ol>
+<li>Uniform</li>
+<li>Flat/HalfFlat (<strong>Weakest prior</strong>)</li>
+<li>Cauchy/HalfCauchy(<strong>Medium prior</strong>)</li>
+<li>Normal</li>
+<li>Exponential<ul>
+<li>描述泊松过程中事件之间的时间的概率分布</li>
+<li>无记忆性：接下来公交来的概率和你等了多久并没有关系 $P(T&gt;t+s|T&gt;t)=P(T&gt;s)$</li>
+</ul>
+</li>
+</ol>
+<h2 id="Lecture-04-Parameters-Priors-and-Posteriors"><a href="#Lecture-04-Parameters-Priors-and-Posteriors" class="headerlink" title="Lecture 04 Parameters, Priors and Posteriors"></a>Lecture 04 Parameters, Priors and Posteriors</h2><h3 id="1-Parameters"><a href="#1-Parameters" class="headerlink" title="1. Parameters"></a>1. Parameters</h3><ul>
+<li>Different variable have different numbers and names of parameters but they all have them</li>
+<li>Those parameters change the particular shape of the distribution of that random variable, while still keeping it within the same family</li>
+</ul>
+<h3 id="2-Marginal-Distributions"><a href="#2-Marginal-Distributions" class="headerlink" title="2. Marginal Distributions"></a>2. Marginal Distributions</h3><ul>
+<li>假设有一个联合分布$P(x, y)$，其关于其中一个变量的边缘分布为 $P(X)=\Sigma_{y}P(x,y)=\Sigma_yP(x|y)P(y)$</li>
+<li><strong>The shapes of marginal distributions are not always given by the name of the variable</strong><ul>
+<li>e.g. If the variable X is a Foo, P(X) is not always going to be a member of the family Foo</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-Joint-Distribution"><a href="#3-Joint-Distribution" class="headerlink" title="3. Joint Distribution"></a>3. Joint Distribution</h3><ul>
+<li>$P(X, Y) = P(X|Y)P(Y)$</li>
+</ul>
+<h3 id="4-Conditional-Distributions"><a href="#4-Conditional-Distributions" class="headerlink" title="4. Conditional Distributions"></a>4. Conditional Distributions</h3><h3 id="5-observed-Parameter"><a href="#5-observed-Parameter" class="headerlink" title="5.observed Parameter"></a>5.<code>observed</code> Parameter</h3><ul>
+<li>If we give a value to <code>observed</code> parameter, then calling <code>pm.sample</code> will draw from the conditional distribution $P(Signal|Measurement=observed\ data)$ <strong>instead of the marginal distribution $P(Signal)$</strong></li>
+<li>Put another way: the original model specified our uncertainty about the values of the signal and the measurement, and samples from it were used to numerically and visually represent that uncertainty.(<strong>Prior</strong>) Once we’ve observed the value of one of the random variables, the state of our knowledge changes, and so we’d like the samples to change to reflect that.(<strong>Posterior</strong>)</li>
+</ul>
+<h3 id="6-Implementation-with-PyMC"><a href="#6-Implementation-with-PyMC" class="headerlink" title="6. Implementation with PyMC"></a>6. Implementation with PyMC</h3><h4 id="1-Steps"><a href="#1-Steps" class="headerlink" title="1. Steps"></a>1. Steps</h4><p>​    You write down a <em>forwards model</em> that</p>
+<ol>
+<li><p>describes <font color="#003262"> <strong>uncertainty about unknown quantities</strong> </font> like parameters. This is the <font color="#003262"><strong>prior</strong></font>.</p>
+<p>and then</p>
+</li>
+<li><p>explains what <font color="#FDB515"><strong>the distribution of the data _would be_</strong></font>, if you did know those unknown quantities. This is the <font color="#FDB515"><strong>likelihood</strong></font>.</p>
+<p>pyMC can then “work backwards” and tell you</p>
+</li>
+<li><p>what <font color="#2ca02c"> <strong>your new beliefs<br>about the unknown quantities are</strong></font>,<br>once you’ve seen that data. This is the <font color="#2ca02c"><strong>posterior</strong></font>.</p>
+<p>These new beliefs are expressed as <em>samples</em>, drawn by <code>pm.sample</code>.</p>
+</li>
+</ol>
+<h4 id="2-Bayes’-Rule"><a href="#2-Bayes’-Rule" class="headerlink" title="2. Bayes’ Rule"></a>2. Bayes’ Rule</h4><script type="math/tex; mode=display">\color{green}{p(\beta\lvert X)} = \color{goldenrod}{p(X\lvert\beta)} * \color{darkblue}{p(\beta)}\ /\ p(X)</script><h4 id="3-Sampling-Functions"><a href="#3-Sampling-Functions" class="headerlink" title="3. Sampling Functions"></a>3. Sampling Functions</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> pm.Model() <span class="keyword">as</span> model:</span><br><span class="line">    <span class="comment"># random variable to model uncertainty about the truth before seeing data: the _prior_</span></span><br><span class="line">    parameter_var = pm.SomeRandomVariable(<span class="string">"prior_variable"</span>, parameter=value)  </span><br><span class="line">    <span class="comment"># random variable to model uncertainty in data, given parameters: the _likelihood_</span></span><br><span class="line">    observed_var = pm.OtherRandomVariable(<span class="string">"data_variable"</span>, paramter=parameter_var, observed=data_we_saw)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># samples to estimate uncertainty before seeing data</span></span><br><span class="line">pripred_samples = pm.sample_prior_predictive(model=model)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> model:</span><br><span class="line">    <span class="comment"># samples to estimate uncertainty about the parameters after seeing data: the _posterior_</span></span><br><span class="line">    post_samples_trace = pm.sample()</span><br><span class="line"></span><br><span class="line"><span class="comment"># samples to estimate uncertainty in what future data we might see:</span></span><br><span class="line">postpred_samples = pm.sample_posterior_predictive(post_samples_trace, model=model)</span><br></pre></td></tr></table></figure>
+<ol>
+<li><code>pm.sample_prior_predictive(model)</code><ul>
+<li>Samples to estimate uncertainty before seeing data</li>
+</ul>
+</li>
+<li><code>pm.sample()</code><ul>
+<li>Samples to estimate uncertainty about the <strong>parameters</strong> after seeing data</li>
+</ul>
+</li>
+<li><code>pm.sample_posterior_predictive()</code><ul>
+<li>samples to estimate uncertainty in what <strong>future data</strong> we might see</li>
+</ul>
+</li>
+</ol>
+<p><strong>PS: Bootstrapping do not have priors</strong></p>
+<ul>
+<li>Drawbacks<ul>
+<li>For some problems, there is no statistic of the data that supports the inference</li>
+<li>If we just look at likelihoods, we can end up making very silly inferences</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-Choosing-Priors"><a href="#4-Choosing-Priors" class="headerlink" title="4. Choosing Priors"></a>4. Choosing Priors</h4><p><strong>1. Common Priors, and what they imply about your beliefs</strong></p>
+<ul>
+<li><p><code>Categorical</code>: These are my beliefs about each possible value</p>
+</li>
+<li><p>(<code>Discrete</code>)<code>Uniform</code>: The value is between these two numbers</p>
+</li>
+<li><p><code>Normal</code>: I know the value approximately, up to some spread</p>
+</li>
+<li><p><code>LogNormal</code>: I know the order of magnitude approximately, up to some spread</p>
+</li>
+<li><p><code>Cauchy</code>: I know almost nothing about this variable</p>
+</li>
+</ul>
+<p><strong>2. Improper Priors</strong></p>
+<ul>
+<li><p><code>Flat</code>: I know nothing about this variable, except it is a number (improper!)</p>
+</li>
+<li><p><code>HalfFlat</code>: I know nothing about this variable, except that it’s positive (improper!)</p>
+</li>
+</ul>
+<h4 id="5-Choosing-Likelihoods"><a href="#5-Choosing-Likelihoods" class="headerlink" title="5. Choosing Likelihoods"></a>5. Choosing Likelihoods</h4><p><strong>1. Common Likelihoods, and how they relate the parameters to data</strong></p>
+<ul>
+<li><p><code>Normal</code>: values get more unlikely as they get further from <code>mu</code>, at a rate determined by <code>1/sd</code> (aka <code>tau</code>)</p>
+</li>
+<li><p><code>Binomial</code>: data is the outcome of a number of <code>N</code> independent attempts, each with probability <code>p</code> of occurring</p>
+</li>
+<li><p><code>Poisson</code>: data is the outcome of independent attempts where <code>N</code> is large or infinite and <code>p</code> is small or infinitesimal, with <code>mu=N * p</code>.</p>
+</li>
+<li><p><code>Exponential</code>: values get more unlikely as they get larger, at a rate determined by <code>lam</code> OR data is the time in between events in a memoryless process, occuring about <code>lam</code> every unit time</p>
+</li>
+<li><p><code>Laplace</code>: values get more unlikely as they get further from <code>mu</code> in absolute difference, at a rate determined by <code>1/b</code></p>
+</li>
+</ul>
+<p>Note that some are mechanistic, others are not: the <code>Normal</code> is not particularly mechanistic, but the <code>Poisson</code> and <code>Binomial</code> are.</p>
+<p>The <code>Exponential</code> might be mechanistic in some models, but not in others.</p>
+<h2 id="Lecture-05-Null-Hypothesis-Significance-Testing"><a href="#Lecture-05-Null-Hypothesis-Significance-Testing" class="headerlink" title="Lecture 05 Null Hypothesis Significance Testing"></a>Lecture 05 Null Hypothesis Significance Testing</h2><h3 id="1-Null-Hypothesis-Significance-Testing"><a href="#1-Null-Hypothesis-Significance-Testing" class="headerlink" title="1. Null Hypothesis Significance Testing"></a>1. Null Hypothesis Significance Testing</h3><h4 id="1-Steps-1"><a href="#1-Steps-1" class="headerlink" title="1. Steps"></a>1. Steps</h4><ol>
+<li>Collect data </li>
+<li>Come up with a model of “nothing interesting is happening in my data”(比如这两组数据均值没有区别)<ul>
+<li>The model can be <strong>1. resampling-based; 2 mathematical; 3. <code>pyMC</code></strong></li>
+<li>This is called the null model</li>
+</ul>
+</li>
+<li>Obtain the sampling distribution of the statistic from the model</li>
+<li>Compare the value of the statistic observed on the data to the sampling distribution. If the observed value is “too extreme”, the test is positive and the result is “statistically significant” （计算比观察值更极端的情况的概率 如果低于threshold 则判断为拒绝原假设）</li>
+</ol>
+<h4 id="2-Null-Hypothesis-Testing-Cannot-be-Done-with-Basic-Bootstrapping"><a href="#2-Null-Hypothesis-Testing-Cannot-be-Done-with-Basic-Bootstrapping" class="headerlink" title="2. Null Hypothesis Testing Cannot be Done with Basic Bootstrapping"></a>2. Null Hypothesis Testing Cannot be Done with Basic Bootstrapping</h4><ul>
+<li>Bootstrapping 是真实数据的模拟，而NHT是在Null成立的情况下检验是不是可以拒绝原假设，即便观察的数据否定原假设，我们还是需要通过模型来生成原假设为真时候的数据，而在原假设为假的情况下 bootstrapping 无法生存原假设为真的数据，所以Bootstrapping 不适合做假设检验</li>
+</ul>
+<h4 id="3-When-the-Value-p-is-Below-a-Threshold-we-Reject-the-Null"><a href="#3-When-the-Value-p-is-Below-a-Threshold-we-Reject-the-Null" class="headerlink" title="3. When the Value $p$ is Below a Threshold, we Reject the Null"></a>3. When the Value $p$ is Below a Threshold, we Reject the Null</h4><h4 id="4-p-value"><a href="#4-p-value" class="headerlink" title="4. $p$-value"></a>4. $p$-value</h4><ul>
+<li><p>$p$ is not the posterior probability of the Null</p>
+<ul>
+<li>We did not set a prior of $p$</li>
+</ul>
+</li>
+<li><p>$1-p$ is not the probability another run of same experiment would report the same finding</p>
+</li>
+<li><p>$p$ is the conditional probability of such an extreme statistic given that the Null is True</p>
+</li>
+</ul>
+  <table class="center">
+    <tbody>
+      <tr>
+        <th class="border-less"></th>
+        <th> F(原假设(e.g.无罪)为假) </th>
+        <th> T(原假设为真)</th>
+      </tr>
+      <tr>
+        <td>+(拒绝原假设)</td>
+        <td style="background-color: rgb(0,50,98); color: white"> True Positive Rate, Power, Sensitivity（判断有罪的人有罪） </td>
+        <td style="background-color: rgb(253,181,21);"> False Positive Rate(把无辜的人当有罪), &#945; </td>
+      </tr>
+       <tr>
+        <td>-(接受原假设)</td>
+        <td style="background-color: rgb(0,50,98); color: white"> False Negative Rate(放走有罪的人), &#946;</td>
+        <td style="background-color: rgb(253,181,21);"> True Negative Rate, Specificity</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+<ul>
+<li>“P 值就是当原假设为真时，<strong>比</strong>所得到的样本观察结果<strong>更极端</strong>的结果出现的概率”。如果 P 值很小，就表明，在原假设为真的情况下出现的那个分布里面，只有很小的部分，比出现的这个事件（比如，Q）更为极端。没多少事件比 Q 更极端，那就很有把握说原假设不对了</li>
+</ul>
+<h3 id="2-Steps-of-Generic-hypothesis-testing-Not-Null-Hypothesis-testing-LJ"><a href="#2-Steps-of-Generic-hypothesis-testing-Not-Null-Hypothesis-testing-LJ" class="headerlink" title="2. Steps of Generic hypothesis testing(Not Null Hypothesis testing)(LJ)"></a>2. Steps of Generic hypothesis testing(<font color="darkblue">Not Null Hypothesis testing</font>)(LJ)</h3><ol>
+<li>Define a statistic of the observed data and calcualte thet chance of observing that statistic </li>
+<li>Determine the chance your results would occur under that hypothsis</li>
+<li>If the chance that your results or others like them would occur is sufficiently low, the hypothesis is rejected as falsified</li>
+<li>最后算出概率后可以反推回观测值，比如投硬币案例中投xx次有xxxx次正面就可以证明硬币不均匀</li>
+</ol>
+<h3 id="3-t-Tests-关注两个组别是否存在差异"><a href="#3-t-Tests-关注两个组别是否存在差异" class="headerlink" title="3. t-Tests(关注两个组别是否存在差异)"></a>3. t-Tests(关注两个组别是否存在差异)</h3><h4 id="1-Defining-t"><a href="#1-Defining-t" class="headerlink" title="1. Defining $t$"></a>1. Defining $t$</h4><ul>
+<li><script type="math/tex; mode=display">t=\frac{\mu_a - \mu_b}{\sigma\sqrt{2/N_g}}</script></li>
+<li><p>where 𝜇𝐴 for a pandas series <code>A</code> is <code>A.mean()</code>, and 𝑁𝑔 is <code>len(A)</code>, which is presumed equal to <code>len(B)</code>. The other value the denominator, 𝜎, is the estimate of the group standard deviation and is given by:</p>
+</li>
+<li>$\sigma^2 = \frac{\sigma^2_A + \sigma^2_B}{2}$(Pooled standard deviation)</li>
+<li>Degrees of freedom is the only parameter for the null distribution of $t$. In general, degrees of freedom is equal to the numer of datapoints from the dataset</li>
+</ul>
+<h3 id="4-Randomization-Tests"><a href="#4-Randomization-Tests" class="headerlink" title="4. Randomization Tests"></a>4. Randomization Tests</h3><h4 id="1-Idea"><a href="#1-Idea" class="headerlink" title="1. Idea"></a>1. Idea</h4><ul>
+<li>The idea of a randomization test is to apply such a procedure to your data and see whether your data behaves more like two salt shakers or more like a salt and a pepper shaker.</li>
+<li>We strip the labels off of the data, we put all of it into a bag, and then shuffle it around. Then, we pull it back out, sticking the labels back on randomly as we go.</li>
+<li>适用于总体分布位置的小样本资料以及某些难以用常规方法分析资料的假设检验问题。主体思想是在小数据量情况下，如果两组样本分布相同，把他们混在一起重新抽样分布也还是相同，但是如果分布不同则混合后结果不会相同，在样本分布不同的时候通过这种混合抽样的方法算出来的统计量分布会与观察值产生比较大的偏差，从而证明两组样本分布不同</li>
+</ul>
+<h2 id="Lecture-06-Bayesian-Inference"><a href="#Lecture-06-Bayesian-Inference" class="headerlink" title="Lecture 06 Bayesian Inference"></a>Lecture 06 Bayesian Inference</h2><h3 id="0-Bayes’-Rule"><a href="#0-Bayes’-Rule" class="headerlink" title="0. Bayes’ Rule"></a>0. Bayes’ Rule</h3><script type="math/tex; mode=display">
+p(\text{hypothesis}\vert \text{data}) = \frac{p(\text{data}\vert \text{hypothesis}) p(\text{hypothesis})}{p(\text{data})}</script><h3 id="1-Traditional-Way"><a href="#1-Traditional-Way" class="headerlink" title="1. Traditional Way"></a>1. Traditional Way</h3><p><img src="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-1/Bay.png" alt></p>
+<h3 id="2-pyMC-models"><a href="#2-pyMC-models" class="headerlink" title="2. pyMC models"></a>2. pyMC models</h3><h3 id="3-Iteratively-Applying-Bayes’-Rule"><a href="#3-Iteratively-Applying-Bayes’-Rule" class="headerlink" title="3. Iteratively Applying Bayes’ Rule"></a>3. Iteratively Applying Bayes’ Rule</h3><ul>
+<li><em>After</em> the first tests have been passed is also <em>before</em> the second tests have been passed.</li>
+<li>Therefore the posterior for the first set of tests is the prior for the second set of tests.</li>
+</ul>
+<p><img src="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-1/截屏2019-10-29下午1.11.00.png" alt></p>
+<h3 id="4-Bayes’-Rule-Flips-the-Table-Around"><a href="#4-Bayes’-Rule-Flips-the-Table-Around" class="headerlink" title="4. Bayes’ Rule Flips the Table Around"></a>4. Bayes’ Rule Flips the Table Around</h3><p><img src="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-1/截屏2019-10-29下午1.15.05.png" alt></p>
+<p><img src="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-1/截屏2019-10-29下午1.15.24.png" alt></p>
+<h3 id="5-Credible-Intervals"><a href="#5-Credible-Intervals" class="headerlink" title="5. Credible Intervals"></a>5. Credible Intervals</h3><h4 id="1-Definition"><a href="#1-Definition" class="headerlink" title="1. Definition"></a>1. Definition</h4><ul>
+<li>A Bayesian Credible Interval is <strong>any</strong> interval that covers some given percentage of the posterior density<ul>
+<li>e.g. <strong>95% Credible Interval</strong> covers 95% of the posterior. That is, if the 95% Credible Interval is (-1, 1) we believe there is 95% chance that the value lies between -1 and 1</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-Highest-Posterior-Density-Intervals"><a href="#2-Highest-Posterior-Density-Intervals" class="headerlink" title="2. Highest Posterior Density Intervals"></a>2. Highest Posterior Density Intervals</h4><ul>
+<li>The HPDI is the shortest credible interval</li>
+</ul>
+<h3 id="6-Point-estimate"><a href="#6-Point-estimate" class="headerlink" title="6. Point estimate"></a>6. Point estimate</h3><h4 id="1-Ways-to-give-estimate-in-Bayesian-By-distribution"><a href="#1-Ways-to-give-estimate-in-Bayesian-By-distribution" class="headerlink" title="1. Ways to give estimate in Bayesian: By distribution"></a>1. Ways to give estimate in Bayesian: By distribution</h4><ol>
+<li>State the probability that it is true under my posterior.</li>
+<li>Highest posterior density interval</li>
+</ol>
+<p><strong><font color="darkblue">Ps: It’s very unnatural to give point estimate in Bayesian inference</font></strong></p>
+<h4 id="2-If-have-no-choice-use-MAP-value"><a href="#2-If-have-no-choice-use-MAP-value" class="headerlink" title="2. If have no choice, use MAP value"></a>2. If have no choice, use MAP value</h4><ul>
+<li><p>The closest thing to a Bayesian approach to providing point estimates is the maximum a posterior</p>
+</li>
+<li><p>MAP is the setting of all of the unkniwn variables that has the highest probability under the posterior</p>
+<ul>
+<li>That is, choose params to make</li>
+</ul>
+<script type="math/tex; mode=display">
+P(params|data)</script><p>as high as possible</p>
+</li>
+<li><p><code>find_MAP</code></p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> sentiment_switch_model:</span><br><span class="line">    sentiment_MAP = arrays_to_scalars(pm.find_MAP(start=sentiment_trace[<span class="number">-1</span>]))</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Data-Science/" rel="tag"># Data Science</a>
+            
+              <a href="/tags/Berkeley-Course/" rel="tag"># Berkeley Course</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/11/20/CS224n-Learning-Notes-Word-Vectors/" rel="next" title="CS224n Learning Notes--Word Vectors">
+                  <i class="fa fa-chevron-left"></i> CS224n Learning Notes--Word Vectors
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Berkeley-Course-PSYCH101-D-Data-Science-for-Research-Psychology-Lecture-Notes-Part-1"><span class="nav-number">1.</span> <span class="nav-text">Berkeley Course PSYCH101-D Data Science for Research Psychology Lecture Notes Part 1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-02-Probability-and-Statistics"><span class="nav-number">1.2.</span> <span class="nav-text">Lecture 02 Probability and Statistics</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Probability"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. Probability</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Probability-Distributions"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. Probability Distributions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Discrete-Distributions"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">1. Discrete Distributions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Continuous-Distributions"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">2. Continuous Distributions</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Statistics"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. Statistics</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Purposes"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">1. Purposes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Frequently-used-statistics"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">2. Frequently used statistics</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Law-of-Large-Numbers"><span class="nav-number">1.2.4.</span> <span class="nav-text">4. Law of Large Numbers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Bootstrapping"><span class="nav-number">1.2.5.</span> <span class="nav-text">5. Bootstrapping</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Confidence-Interval"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">1. Confidence Interval</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Steps"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">2. Steps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Understanding-Bootstrapping"><span class="nav-number">1.2.5.3.</span> <span class="nav-text">3. Understanding Bootstrapping</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-03-Models-and-Random-Variables"><span class="nav-number">1.3.</span> <span class="nav-text">Lecture 03 Models and Random Variables</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Models"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. Models</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Frequently-used-distributions"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. Frequently used distributions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Discrete"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">1. Discrete</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Continuous"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">2. Continuous</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-04-Parameters-Priors-and-Posteriors"><span class="nav-number">1.4.</span> <span class="nav-text">Lecture 04 Parameters, Priors and Posteriors</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Parameters"><span class="nav-number">1.4.1.</span> <span class="nav-text">1. Parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Marginal-Distributions"><span class="nav-number">1.4.2.</span> <span class="nav-text">2. Marginal Distributions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Joint-Distribution"><span class="nav-number">1.4.3.</span> <span class="nav-text">3. Joint Distribution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Conditional-Distributions"><span class="nav-number">1.4.4.</span> <span class="nav-text">4. Conditional Distributions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-observed-Parameter"><span class="nav-number">1.4.5.</span> <span class="nav-text">5.observed Parameter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Implementation-with-PyMC"><span class="nav-number">1.4.6.</span> <span class="nav-text">6. Implementation with PyMC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Steps"><span class="nav-number">1.4.6.1.</span> <span class="nav-text">1. Steps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Bayes’-Rule"><span class="nav-number">1.4.6.2.</span> <span class="nav-text">2. Bayes’ Rule</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Sampling-Functions"><span class="nav-number">1.4.6.3.</span> <span class="nav-text">3. Sampling Functions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Choosing-Priors"><span class="nav-number">1.4.6.4.</span> <span class="nav-text">4. Choosing Priors</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Choosing-Likelihoods"><span class="nav-number">1.4.6.5.</span> <span class="nav-text">5. Choosing Likelihoods</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-05-Null-Hypothesis-Significance-Testing"><span class="nav-number">1.5.</span> <span class="nav-text">Lecture 05 Null Hypothesis Significance Testing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Null-Hypothesis-Significance-Testing"><span class="nav-number">1.5.1.</span> <span class="nav-text">1. Null Hypothesis Significance Testing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Steps-1"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">1. Steps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Null-Hypothesis-Testing-Cannot-be-Done-with-Basic-Bootstrapping"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">2. Null Hypothesis Testing Cannot be Done with Basic Bootstrapping</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-When-the-Value-p-is-Below-a-Threshold-we-Reject-the-Null"><span class="nav-number">1.5.1.3.</span> <span class="nav-text">3. When the Value $p$ is Below a Threshold, we Reject the Null</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-p-value"><span class="nav-number">1.5.1.4.</span> <span class="nav-text">4. $p$-value</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Steps-of-Generic-hypothesis-testing-Not-Null-Hypothesis-testing-LJ"><span class="nav-number">1.5.2.</span> <span class="nav-text">2. Steps of Generic hypothesis testing(Not Null Hypothesis testing)(LJ)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-t-Tests-关注两个组别是否存在差异"><span class="nav-number">1.5.3.</span> <span class="nav-text">3. t-Tests(关注两个组别是否存在差异)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Defining-t"><span class="nav-number">1.5.3.1.</span> <span class="nav-text">1. Defining $t$</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Randomization-Tests"><span class="nav-number">1.5.4.</span> <span class="nav-text">4. Randomization Tests</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Idea"><span class="nav-number">1.5.4.1.</span> <span class="nav-text">1. Idea</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-06-Bayesian-Inference"><span class="nav-number">1.6.</span> <span class="nav-text">Lecture 06 Bayesian Inference</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-Bayes’-Rule"><span class="nav-number">1.6.1.</span> <span class="nav-text">0. Bayes’ Rule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Traditional-Way"><span class="nav-number">1.6.2.</span> <span class="nav-text">1. Traditional Way</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-pyMC-models"><span class="nav-number">1.6.3.</span> <span class="nav-text">2. pyMC models</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Iteratively-Applying-Bayes’-Rule"><span class="nav-number">1.6.4.</span> <span class="nav-text">3. Iteratively Applying Bayes’ Rule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Bayes’-Rule-Flips-the-Table-Around"><span class="nav-number">1.6.5.</span> <span class="nav-text">4. Bayes’ Rule Flips the Table Around</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Credible-Intervals"><span class="nav-number">1.6.6.</span> <span class="nav-text">5. Credible Intervals</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Definition"><span class="nav-number">1.6.6.1.</span> <span class="nav-text">1. Definition</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Highest-Posterior-Density-Intervals"><span class="nav-number">1.6.6.2.</span> <span class="nav-text">2. Highest Posterior Density Intervals</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Point-estimate"><span class="nav-number">1.6.7.</span> <span class="nav-text">6. Point estimate</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Ways-to-give-estimate-in-Bayesian-By-distribution"><span class="nav-number">1.6.7.1.</span> <span class="nav-text">1. Ways to give estimate in Bayesian: By distribution</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-If-have-no-choice-use-MAP-value"><span class="nav-number">1.6.7.2.</span> <span class="nav-text">2. If have no choice, use MAP value</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.png"
+      alt="Xiao Liu">
+  <p class="site-author-name" itemprop="name">Xiao Liu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/haroldliuj" title="GitHub &rarr; https://github.com/haroldliuj" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:haroldliuj@gmail.com" title="E-Mail &rarr; mailto:haroldliuj@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiao Liu</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'FoLSl7NpGs5fSxnb59tfNULA-gzGzoHsz',
+    appKey: 'Yl577c0mRRb9AIFa03rdU8c1',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
