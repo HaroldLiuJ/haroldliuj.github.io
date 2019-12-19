@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="IntroductionThis is my lecture notes for UC Berkeley course Data Science for Research Psychology instructed by Professor Charles Frye. This post contains some basic data science and statistic knowledg">
+<meta name="keywords" content="Data Science,Berkeley Course">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Data Science for Research Psychology Lecture Notes Part 2">
+<meta property="og:url" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/index.html">
+<meta property="og:site_name" content="Xiao Liu&#39;s Blog">
+<meta property="og:description" content="IntroductionThis is my lecture notes for UC Berkeley course Data Science for Research Psychology instructed by Professor Charles Frye. This post contains some basic data science and statistic knowledg">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-17下午9.17.19.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-18上午11.50.24.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-18下午2.00.56.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-18下午2.01.02.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-18下午3.05.39.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-18下午3.25.45.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-18下午8.29.35.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-19上午11.25.40.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-19上午11.27.08.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-19上午11.31.54.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-19上午11.34.43.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-19上午11.52.37.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-19上午11.53.53.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-19上午11.50.18.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-19上午11.50.26.png">
+<meta property="og:updated_time" content="2019-12-19T20:36:56.472Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Data Science for Research Psychology Lecture Notes Part 2">
+<meta name="twitter:description" content="IntroductionThis is my lecture notes for UC Berkeley course Data Science for Research Psychology instructed by Professor Charles Frye. This post contains some basic data science and statistic knowledg">
+<meta name="twitter:image" content="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-17下午9.17.19.png">
+  <link rel="canonical" href="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Data Science for Research Psychology Lecture Notes Part 2 | Xiao Liu's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xiao Liu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+        
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-photos">
+      
+    
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>Photos</a>
+
+  </li>
+      
+    
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiao Liu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiao Liu's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            Data Science for Research Psychology Lecture Notes Part 2
+            
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-12-19 12:26:10 / Modified: 12:36:56" itemprop="dateCreated datePublished" datetime="2019-12-19T12:26:10-08:00">2019-12-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/English-Articles/" itemprop="url" rel="index">
+                    <span itemprop="name">English Articles</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This is my lecture notes for UC Berkeley course <a href="https://charlesfrye.github.io/psych101d/" target="_blank" rel="noopener">Data Science for Research Psychology</a> instructed by Professor <a href="https://charlesfrye.github.io/about/" target="_blank" rel="noopener">Charles Frye</a>. This post contains some basic data science and statistic knowledge. Most of the content showed following is from this course’s lecture slides with some of my understanding. You can check the original slides at <a href="https://charlesfrye.github.io/psych101d/" target="_blank" rel="noopener">here</a>. If there are any copyright issues please contact me: haroldliuj@gmail.com.</p><a id="more"></a>
+<p>There are some Chinese in this post, since I think my native language can explain those point more accurately. If you can understand Chinese, that’s great. If you can’t, those content won’t inhibit you from learning the whole picture. Feel free to translate it with Google!</p>
+<p>Have a nice trip!</p>
+<h2 id="Lecture-07-Categorical-Effects"><a href="#Lecture-07-Categorical-Effects" class="headerlink" title="Lecture 07 Categorical Effects"></a>Lecture 07 Categorical Effects</h2><h3 id="Mixture-Distribution"><a href="#Mixture-Distribution" class="headerlink" title="Mixture Distribution"></a>Mixture Distribution</h3><ul>
+<li>The combination of different distributions</li>
+</ul>
+<h3 id="Categorical-Effects-Models"><a href="#Categorical-Effects-Models" class="headerlink" title="Categorical Effects Models"></a>Categorical Effects Models</h3><ul>
+<li>Mixture Distribution-based model are also called <strong>categorical effect models</strong></li>
+<li>Whenever the parameters of one variable depend on another grouping variable, we say there is a categorical effect:<ul>
+<li><strong>the <em>category</em> or <em>group</em> that an observation comes from has an <em>effect</em> on the distribution we choose to model the observation.</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="ANOVA-Model"><a href="#ANOVA-Model" class="headerlink" title="ANOVA Model"></a>ANOVA Model</h4><ul>
+<li>Normal mixture distribution </li>
+</ul>
+<h3 id="Analysis-of-Variance"><a href="#Analysis-of-Variance" class="headerlink" title="Analysis of Variance"></a>Analysis of Variance</h3><ul>
+<li>Core idea:  <strong>if group membership has a strong effect on an observed variable, then splitting the data up by group should reduce the variance substantially, while the mean squared difference of the groups should go up. This isn’t true of every possible way that an observed variable might depend on group membership, but it is true in many cases, as described below in “When to Use ANOVA”.</strong></li>
+</ul>
+<h4 id="Implict-Model-in-ANOVA"><a href="#Implict-Model-in-ANOVA" class="headerlink" title="Implict Model in ANOVA"></a>Implict Model in ANOVA</h4><script type="math/tex; mode=display">
+\begin{align}
+    &\text{Observation}\ j\ \text{in Group}\ i\ &= \ &\text{Grand Mean}\ &+\ &\text{Group Effect}_i\ &+ \ &\text{Unknown Effects}_{ij} \\
+    &Y_{ij} &= \ &\mu_\text{grand} \ &+\ &A_i\ &+ \ &\epsilon_{ij}
+\end{align}</script><ul>
+<li>Grand Mean: The average value of all observations</li>
+<li>Group Effect: The difference between that grand mean and the average of observations in a particular group</li>
+<li>Unknown Effects: The difference between the sum of the first two terms and the value that was observed. (Gaussian)</li>
+</ul>
+<h3 id="F-Statistic"><a href="#F-Statistic" class="headerlink" title="$F$ Statistic"></a>$F$ Statistic</h3><script type="math/tex; mode=display">
+F = \frac{\frac{N}{K-1} \cdot \sum_i A_i^2}{\sigma^2}</script><h4 id="When-to-use-ANOVA"><a href="#When-to-use-ANOVA" class="headerlink" title="When to use ANOVA"></a>When to use ANOVA</h4><ul>
+<li>However, in the case that we have more than two groups (more than two dog breeds) this requires us to perform multiple hypothesis tests. Each time we perform a hypothesis test, there is a chance of a false positive. As we perform more and more hypothesis tests, the chance that at least one of them fails goes up very quickly. This chance is called the *familywise error rate*, since its the rate at which an entire family of tests has an error. Issues with rising familywise error rates are called issues of *multiple comparisons*, since they arise from comparing multiple test statistics to their critical values.</li>
+<li><font color="darkred">The utility of ANOVA comes from the fact that it lets us test the hypothesis that the mean of **at least one of the levels of the variable we are using to group our observations** is different from the overall mean without specifying which level it is.</font>
+
+
+
+</li>
+</ul>
+<h2 id="Lecture-08-Muti-way-Modeling"><a href="#Lecture-08-Muti-way-Modeling" class="headerlink" title="Lecture 08 Muti-way Modeling"></a>Lecture 08 Muti-way Modeling</h2><p>We can use Muti-way Model to see many variables’ effect on the value that we want to observe. </p>
+<h3 id="Randomness"><a href="#Randomness" class="headerlink" title="Randomness"></a>Randomness</h3><ul>
+<li>Our ignorance of some factors leads to randomness</li>
+<li>If we know which factors are present and absent, the data lokks deterministic </li>
+</ul>
+<h3 id="Use-Posterior-to-See-Effects"><a href="#Use-Posterior-to-See-Effects" class="headerlink" title="Use Posterior to See Effects"></a>Use Posterior to See Effects</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> pm.Model() <span class="keyword">as</span> synthetic_data_model:</span><br><span class="line">    mus = pm.Normal(<span class="string">"mus"</span>, mu=<span class="number">0</span>, sd=<span class="number">1e2</span>, shape=(<span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line">    sd = pm.Exponential(<span class="string">"sigma"</span>, lam=<span class="number">0.1</span>)</span><br><span class="line">    observations = pm.Normal(<span class="string">"observations"</span>,                           							mu=mus[observed_data_df[<span class="string">"factor1"</span>],observed_data_df[<span class="string">"factor2"</span>]],</span><br><span class="line">   				 sd=sd, observed=observed_data_df[<span class="string">"measurement"</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> synthetic_data_model:</span><br><span class="line">    trace = pm.sample()</span><br><span class="line">    synthetic_posterior_samples  = shared_util.samples_to_dataframe(trace)</span><br></pre></td></tr></table></figure>
+<p>The use <code>mus</code> posterior to calculate the effect of one factor or two factors.</p>
+<h4 id><a href="#" class="headerlink" title=" "></a> </h4><h4 id="See-factors’-effect-separately"><a href="#See-factors’-effect-separately" class="headerlink" title="See factors’ effect separately"></a>See factors’ effect separately</h4><ol>
+<li>Set a baseline</li>
+<li>Use the mean that represent one factor occur while the other doesn’t subtract baseline’s mean.</li>
+</ol>
+<h4 id="See-two-factors’-interaction"><a href="#See-two-factors’-interaction" class="headerlink" title="See two factors’ interaction"></a>See two factors’ interaction</h4><h5 id="No-Interaction"><a href="#No-Interaction" class="headerlink" title="No Interaction"></a>No Interaction</h5><p>If we draw a plot of one factor with another occur or not:</p>
+<p><img src="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-17下午9.17.19.png" alt></p>
+<p>If two graph overlaps greatly, we can say that Factor2 does not interact with Factor1</p>
+<h5 id="Compute-Interaction"><a href="#Compute-Interaction" class="headerlink" title="Compute Interaction"></a>Compute Interaction</h5><ul>
+<li>Two factors have same baseline</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_interaction_effect</span><span class="params">(accuracies)</span>:</span></span><br><span class="line">    baseline = accuracies[<span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    delta_factor1 = accuracies[<span class="number">0</span>, <span class="number">1</span>] - baseline</span><br><span class="line">    delta_factor2 = accuracies[<span class="number">1</span>, <span class="number">0</span>] - baseline</span><br><span class="line">    </span><br><span class="line">    prediction_from_separate = baseline + delta_left_eye + delta_right_eye</span><br><span class="line">    actually_observed_value = accuracies[<span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> actually_observed_value - prediction_from_separate <span class="comment">###相互作用的影响是 实际观察值 与 每一个因素单独影响的和 的差值</span></span><br></pre></td></tr></table></figure>
+<p>The idea here is if two factors do not interact then the <code>prediction_from_separate</code> is similar to <code>actually_observed_value</code> since two factors effect should equal to two factors’ separate effect. So the <code>interaction_effect</code> is the difference between <code>actually_observed_value</code> and <code>prediction_from_separate</code> </p>
+<ul>
+<li><p>Two factors have different baseline</p>
+<ul>
+<li>in this case <code>hard</code> regard <code>young</code> as baseline and <code>old</code> regard <code>young</code> as baseline</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> pm.Model() <span class="keyword">as</span> eeg_combined_model:</span><br><span class="line">    means = pm.Normal(<span class="string">"mus"</span>, mu=<span class="number">0</span>, sd=<span class="number">1e6</span>, shape=(<span class="number">3</span>, <span class="number">2</span>))</span><br><span class="line">    sigma = pm.Exponential(<span class="string">"sigma"</span>, lam=<span class="number">0.1</span>)</span><br><span class="line">    </span><br><span class="line">    observations = pm.Normal(<span class="string">"d"</span>, mu=means[difficulty_indexer, 													age_indexer], sd=sigma, observed=data[<span class="string">"d"</span>])</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_delta_age_easy</span><span class="params">(mus)</span>:</span></span><br><span class="line">    young_easy = mus[<span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    old_easy = mus[<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> old_easy - young_easy</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_delta_age_hard</span><span class="params">(mus)</span>:</span></span><br><span class="line">    young_hard = mus[<span class="number">2</span>, <span class="number">0</span>]</span><br><span class="line">    old_hard = mus[<span class="number">2</span>, <span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> old_hard - young_hard</span><br></pre></td></tr></table></figure>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_interaction_effect</span><span class="params">(mus)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> compute_delta_age_hard(mus) - compute_delta_age_easy(mus)</span><br></pre></td></tr></table></figure>
+<h2 id="Lecture-09-Regression"><a href="#Lecture-09-Regression" class="headerlink" title="Lecture 09 Regression"></a>Lecture 09 Regression</h2><p>Here we use Sir Francis Galton’s parent-child height dataset (<a href="https://doi.org/10.7910/DVN/T0HSJ1" target="_blank" rel="noopener">source</a>)</p>
+<p>First we map parents mid-height to categrical variables (0-5)</p>
+<h3 id="Categorical-Model"><a href="#Categorical-Model" class="headerlink" title="Categorical Model"></a>Categorical Model</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">grand_mean = df.groupby(<span class="string">"midparental_height_category_idx"</span>)[<span class="string">"height"</span>].mean().mean()</span><br><span class="line">pooled_sd = df.groupby(<span class="string">"midparental_height_category_idx"</span>)[<span class="string">"height"</span>].std().mean()</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> pm.Model() <span class="keyword">as</span> categorical_model:</span><br><span class="line">    group_means = pm.Normal(<span class="string">"mus"</span>, mu=grand_mean, sd=<span class="number">1e3</span>, shape=<span class="number">5</span>)</span><br><span class="line">    sd = pm.Exponential(<span class="string">"sigma"</span>, lam=<span class="number">1</span> / pooled_sd)</span><br><span class="line">    </span><br><span class="line">    heights = pm.Normal(<span class="string">"heights"</span>, mu=</span><br><span class="line">               group_means [df[<span class="string">"midparental_height_category_idx"</span>]],</span><br><span class="line">                sd=sd,observed=df[<span class="string">"height"</span>])</span><br></pre></td></tr></table></figure>
+<h5 id="We-can-use-mean-as-predictor-for-categorical-model-with-a-Normal-likelihood"><a href="#We-can-use-mean-as-predictor-for-categorical-model-with-a-Normal-likelihood" class="headerlink" title="We can use mean as predictor for categorical model with a Normal likelihood"></a>We can use mean as predictor for categorical model with a Normal likelihood</h5><script type="math/tex; mode=display">
+\text{height} \approx \text{group_means}[i]</script><font color="darkred">But we can not encode every continuous variable into categorical since if the numerical values are meaningful(like have order relationship), categories are unnatural because real categorical variables are not depend on order. </font>
+
+
+
+<h3 id="Numerical-Regression-Model-Linear-Regression"><a href="#Numerical-Regression-Model-Linear-Regression" class="headerlink" title="Numerical Regression Model(Linear Regression)"></a>Numerical Regression Model(Linear Regression)</h3><h4 id="Basic-Idea"><a href="#Basic-Idea" class="headerlink" title="Basic Idea:"></a>Basic Idea:</h4><p>We can represent the $predicted_height$ as:</p>
+<script type="math/tex; mode=display">
+\text{predicted_height} = \text{slope} \cdot \text{midparental_height} + \text{intercept}</script><p>so we can assume:</p>
+<script type="math/tex; mode=display">
+\text{real_height} \approx \text{slope} \cdot \text{midparental_height} + \text{intercept}</script><p><strong>But there are issues for this:</strong></p>
+<ul>
+<li><p>we didn’t define what we meant by “$\approx$”.</p>
+<ul>
+<li>This left us with no choice but to pick the parameters of the line by hand.</li>
+</ul>
+</li>
+<li><p>we no longer have a probabilistic model for our data.</p>
+<ul>
+<li>It’s unclear how we might express our uncertainty about the size of our errors<br>or our uncertainty about the parameters of the line.</li>
+</ul>
+</li>
+</ul>
+<h4 id="Solution"><a href="#Solution" class="headerlink" title="Solution:"></a>Solution:</h4><p>We solve both of these issues at once by specifying a likelihood</p>
+<script type="math/tex; mode=display">
+\text{height} \sim \text{Normal}\left(\text{predicted_height}, \sigma\right)</script><script type="math/tex; mode=display">
+\text{height} \sim \text{Normal}\left(\text{slope} \cdot \text{midparental_height} + \text{intercept}, \sigma\right)</script><h5 id="Build-Model"><a href="#Build-Model" class="headerlink" title="Build Model"></a>Build Model</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> pm.Model() <span class="keyword">as</span> linear_model:</span><br><span class="line">    intercept = pm.Normal(<span class="string">"intercept"</span>, mu=<span class="number">0</span>, sd=<span class="number">1e1</span>)</span><br><span class="line">    slope = pm.Normal(<span class="string">"slope"</span>, mu=<span class="number">0</span>, sd=<span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">    sigma = pm.Exponential(<span class="string">"sigma"</span>, lam=<span class="number">1</span> / height_sd)</span><br><span class="line">    </span><br><span class="line">    height = pm.Normal(<span class="string">"heights"</span>,</span><br><span class="line">                       mu=slope * df[<span class="string">"midparental_height"</span>] + intercept,</span><br><span class="line">                       sd=sigma,</span><br><span class="line">                       observed=df[<span class="string">"height"</span>])</span><br></pre></td></tr></table></figure>
+<p><code>mu = slope * midparental_height + intercept</code> part gave the line that we have in last section but with <code>sigma</code> we can know the expected variability in observed values</p>
+<p><img src="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-18上午11.50.24.png" alt></p>
+<h5 id="Make-Predictions"><a href="#Make-Predictions" class="headerlink" title="Make Predictions"></a>Make Predictions</h5><p>We can use <code>pm.find_MAP</code> to find the best slope and intercept under the circumstance that we observed the data.</p>
+<h4 id="Linear-Regression-Model"><a href="#Linear-Regression-Model" class="headerlink" title="Linear Regression Model"></a>Linear Regression Model</h4><p>if the function relating the two variables is linear, the model is a linear regression model</p>
+<h4 id="Logistic-Regression-Model"><a href="#Logistic-Regression-Model" class="headerlink" title="Logistic Regression Model"></a>Logistic Regression Model</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> pm.Model() <span class="keyword">as</span> golf_binomial:</span><br><span class="line">    slope = pm.Normal(<span class="string">"slope"</span>, mu=<span class="number">0</span>, sd=<span class="number">1</span>)</span><br><span class="line">    intercept = pm.Normal(<span class="string">"intercept"</span>, mu=<span class="number">0</span>, sd=<span class="number">10</span>)</span><br><span class="line">    </span><br><span class="line">    successes = pm.Binomial(<span class="string">"successes"</span>,</span><br><span class="line">                            n=golf[<span class="string">"tries"</span>],</span><br><span class="line">                            p=sigmoid(slope * golf[<span class="string">"distance"</span>]</span><br><span class="line">                                          + intercept),</span><br><span class="line">                            observed=golf[<span class="string">"successes"</span>])</span><br></pre></td></tr></table></figure>
+<h3 id="Deeper-Discuss-of-Linear-Model"><a href="#Deeper-Discuss-of-Linear-Model" class="headerlink" title="Deeper Discuss of Linear Model"></a>Deeper Discuss of Linear Model</h3><h4 id="Log-Probabilities"><a href="#Log-Probabilities" class="headerlink" title="Log Probabilities"></a>Log Probabilities</h4><p>Turning Normal distribution to Log Normal distribution can turn the ratio term in Normal distribution to subtact and turn the shape of the curve from bell shape to parabola.</p>
+<p><img src="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-18下午2.00.56.png" alt></p>
+<p><img src="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-18下午2.01.02.png" alt></p>
+<ul>
+<li>Notice two things: first, the value most probably observed is equal to the prediction, and second, the lots of other values are also quite probable — more so the closer they are to the prediction.</li>
+<li>The “steepness” of the parabola and its height also depend on the standard deviation, as we can see if we use the logarithm rules on the logarithm of the Normal distribution function.</li>
+</ul>
+<p>Mathematical details below:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+p(x\vert\mu,\sigma) &= \frac{1}{\sqrt{2\pi}\sigma} \mathrm{e}^{\frac{-(x-\mu^2)}{2\sigma^2}}\\
+\log p (x\vert\mu,\sigma) &= \log \left(\frac{1}{\sqrt{2\pi}\sigma} \mathrm{e}^{\frac{-(x-\mu^2)}{2\sigma^2}}\right)\\
+&= \log\left(\frac{1}{\sqrt{2\pi}\sigma}\right) + \log\left( \mathrm{e}^{\frac{-(x-\mu^2)}{2\sigma^2}}\right)\\
+&= -\log\left(\sqrt{2\pi}\sigma\right) -(x - \mu)^2/2\sigma^2\\
+&= \underbrace{-\log\left(\sqrt{2\pi}\sigma\right)}_\text{lower if spread increases}
+\underbrace{-(x - \mu)^2}_{\text{higher if mean and value are close}}/ \underbrace{2\sigma^2}_\text{spread controls scale of errors}\\
+&= \underbrace{-\log\left(\sqrt{2\pi}\sigma\right)}_\text{uncertainty penalty} -
+\underbrace{(x - \mu)^2 / 2\sigma^2}_\text{scaled squared error}\\
+\end{align}</script><h5 id="Maximum-Likelihood-Estimation"><a href="#Maximum-Likelihood-Estimation" class="headerlink" title="Maximum Likelihood Estimation"></a>Maximum Likelihood Estimation</h5><p>Changing the parameter to maximize the value of the log-likelihood </p>
+<p><strong>Doing MLE in pyMC</strong></p>
+<p><code>pyMC</code> doesn’t have a <code>find_MLE</code> function directly, but <strong>With the right chocie of prior, we can trun MAP inference into MLE</strong></p>
+<ul>
+<li>Since:</li>
+</ul>
+<script type="math/tex; mode=display">
+\color{green}{p(\text{slope}, \text{intercept}, \sigma \vert \text{data})}
+\propto \color{darkgoldenrod}{p(\text{data} \vert \text{slope}, \text{intercept}, \sigma)}
+\cdot \color{darkblue}{p(\text{slope}, \text{intercept}, \sigma)}</script><ul>
+<li>If we choose a prior where $p(slope, inercept, \sigma)$ is constant, then we can have:</li>
+</ul>
+<script type="math/tex; mode=display">
+\color{green}{p(\text{slope}, \text{intercept}, \sigma \vert \text{data})}
+\propto \color{darkgoldenrod}{p(\text{data} \vert \text{slope}, \text{intercept}, \sigma)}</script><ul>
+<li>The idea here is the more likely the data looks given the parameters, the more likely it is that those parameters are correct.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> pm.Model() <span class="keyword">as</span> ordinary_least_squares:</span><br><span class="line">    Intercept = pm.Flat(<span class="string">"Intercept"</span>)</span><br><span class="line">    Slope = pm.Flat(<span class="string">"Slope"</span>)</span><br><span class="line">    </span><br><span class="line">    Sigma = <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    Heights = pm.Normal(<span class="string">"Heights"</span>,</span><br><span class="line">                       mu=Slope * df[<span class="string">"midparental_height"</span>] \</span><br><span class="line">                        + Intercept,</span><br><span class="line">                       sd=Sigma,</span><br><span class="line">                       observed=df[<span class="string">"height"</span>])</span><br></pre></td></tr></table></figure>
+<p>This is called the <strong>“ordinary least squares”</strong> model because</p>
+<ul>
+<li>maximizing the likelihood means minimizing the squared error</li>
+<li>it’s the “ordinary” or “typical” model for frequentists</li>
+</ul>
+<h4 id="Measure-the-Performance"><a href="#Measure-the-Performance" class="headerlink" title="Measure the Performance"></a>Measure the Performance</h4><h5 id="Variance-Explained"><a href="#Variance-Explained" class="headerlink" title="Variance Explained"></a>Variance Explained</h5><script type="math/tex; mode=display">
+\text{Variance Explained} = 1 - \frac{\text{MSE}_\text{prediction}}{\text{MSE}_\text{baseline}}
+\\
+\text{Where baseline is the circumstance that Slope = 0 and Interception = mean}</script><ul>
+<li>$VE == 1$ means perfect performance   </li>
+<li>If the variance explained by a linear model is not 0, we say the variable are correlated</li>
+</ul>
+<h5 id="R-2-Correlation"><a href="#R-2-Correlation" class="headerlink" title="$R^2$(Correlation)"></a>$R^2$(Correlation)</h5><script type="math/tex; mode=display">
+R^2 = \sqrt{\text{Variance Explained}}</script><h4 id="z-scoring​-standardize"><a href="#z-scoring​-standardize" class="headerlink" title="z-scoring​(standardize)"></a>z-scoring​(standardize)</h4><script type="math/tex; mode=display">
+Data = \frac{Data - mean}{Standard \ Deviation}</script><ul>
+<li>The  Correlation is equal to the slope of the MLE regression line for <strong>standardized data</strong></li>
+</ul>
+<h4 id="Meature-the-Correlation"><a href="#Meature-the-Correlation" class="headerlink" title="Meature the Correlation"></a>Meature the Correlation</h4><h5 id="ROPE-Region-of-Practical-Equivalence"><a href="#ROPE-Region-of-Practical-Equivalence" class="headerlink" title="ROPE: Region of Practical Equivalence"></a>ROPE: Region of Practical Equivalence</h5><ul>
+<li>The core idea of ROPE is if two variables that we are interested in are linear correlated, there will be a <code>slope</code> if we regard one variable as dependent variable and another as independent variable. If we can see the slope is close to 0, we can say these two variables do not have linear correlation.</li>
+</ul>
+<p><img src="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-18下午3.05.39.png" alt></p>
+<ul>
+<li>If the fraction of posterior samples that are inside of the ROPE for that parameter is large(e.g. $\geq{0.99}$), then we can say <strong>we are very certain the parameters is not meaningfully different from 0</strong></li>
+<li>If the <strong>MAP</strong> estimate of the parameter to be exactly, 0 we can say <strong>the most likely single choice for the parameter is 0</strong></li>
+</ul>
+<h4 id="Ridge-Regression"><a href="#Ridge-Regression" class="headerlink" title="Ridge Regression"></a>Ridge Regression</h4><p>Just make the prior of <code>Slope</code> to be Normal</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> pm.Model() <span class="keyword">as</span> ridge_regression_model:</span><br><span class="line">    <span class="comment"># ridge regresion &lt;&gt; Normal prior on slope</span></span><br><span class="line">    Slope = pm.Normal(<span class="string">"Slope"</span>, mu=<span class="number">0</span>, sd=<span class="number">2.5e-2</span>)</span><br><span class="line">    <span class="comment"># This prior says: I think it is very likely that</span></span><br><span class="line">    <span class="comment">#the correlation is between -5e-2 and 3e-2 (and so inside the ROPE)</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    ObservedValues = pm.Normal(<span class="string">"ObservedValues"</span>,</span><br><span class="line">                               mu=Slope * standardized_maternal_heights,</span><br><span class="line">                               sd=<span class="number">1</span>,</span><br><span class="line">                               observed=standardized_paternal_heights)</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-18下午3.25.45.png" alt></p>
+<p>We can see the overlap between the psoterior and the ROPE is now much stronger. But the MAP value is still not 0.</p>
+<h4 id="LASSO-Regression"><a href="#LASSO-Regression" class="headerlink" title="LASSO Regression"></a>LASSO Regression</h4><p>Set Slope’s prior as <code>Laplace</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> pm.Model() <span class="keyword">as</span> lasso_regression_model:</span><br><span class="line">    <span class="comment"># lasso regression &lt;&gt; Laplace prior on slope</span></span><br><span class="line">    Slope = pm.Laplace(<span class="string">"Slope"</span>, mu=<span class="number">0</span>, b=<span class="number">0.01</span>) ***********</span><br><span class="line">    ObservedValues = pm.Normal(<span class="string">"ObservedValues"</span>,</span><br><span class="line">                               mu=Slope * standardized_maternal_heights,</span><br><span class="line">                               sd=<span class="number">1</span>,</span><br><span class="line">                               observed=standardized_paternal_heights)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>In LASSO Regression, the MAP estimate is 0. But note that the posterior probability of the parameter being 0 is 0, because the posterior is still a density, over continuous values.</li>
+</ul>
+<h4 id="If-our-data-is-not-Normal-we-can-use-a-different-likelihood"><a href="#If-our-data-is-not-Normal-we-can-use-a-different-likelihood" class="headerlink" title="If our data is not Normal, we can use a different likelihood"></a>If our data is not Normal, we can use a different likelihood</h4><ul>
+<li>One of the most common cause of non-Normality is <em>outliers</em>: large, rare effects.</li>
+</ul>
+<h5 id="Solution-Robust-Regression"><a href="#Solution-Robust-Regression" class="headerlink" title="Solution: Robust Regression"></a>Solution: Robust Regression</h5><ul>
+<li>A technique for doing accurate regression in the presence of outliers</li>
+<li>Specifically, chocie of probability distribution with “heavy tails” like <code>Cauchy</code>, <code>StudentT</code> or <code>Laplace</code></li>
+</ul>
+<h2 id="Lecture-10-Formulas-and-Linear-Models"><a href="#Lecture-10-Formulas-and-Linear-Models" class="headerlink" title="Lecture 10 Formulas and Linear Models"></a>Lecture 10 Formulas and Linear Models</h2><h3 id="Building-Models-with-Formulas"><a href="#Building-Models-with-Formulas" class="headerlink" title="Building Models with Formulas"></a>Building Models with Formulas</h3><p>For example, the model </p>
+<script type="math/tex; mode=display">
+y \sim \text{Normal}(\text{slope} \times x + \text{intercept}, \sigma)</script><p>becomes</p>
+<script type="math/tex; mode=display">
+y \sim x</script><p>So the model</p>
+<script type="math/tex; mode=display">
+y \sim \text{Normal}(\text{slope} \times f(x) + \text{intercept}, \sigma)</script><p>becomes</p>
+<script type="math/tex; mode=display">
+y \sim f(x)</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> pm.Model() <span class="keyword">as</span> mean_glm_model:</span><br><span class="line">    <span class="comment"># we define a model context and then call the function,</span></span><br><span class="line">    <span class="comment">#  providing the formula as an argument:</span></span><br><span class="line">    mean_glm = pm.GLM.from_formula(</span><br><span class="line">        <span class="string">"sepal_length ~ 1"</span>,</span><br><span class="line">        data=iris_df,  </span><br><span class="line">        family=<span class="string">"normal"</span>  </span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<h4 id="Build-Categorical-Model-with-Formula"><a href="#Build-Categorical-Model-with-Formula" class="headerlink" title="Build Categorical Model with Formula"></a>Build Categorical Model with Formula</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> pm.Model() <span class="keyword">as</span> categorical_glm_model:</span><br><span class="line">    categorical_glm = pm.GLM.from_formula(</span><br><span class="line">        <span class="string">"sepal_length ~ C(is_setosa)"</span>,</span><br><span class="line">        data=iris_df)</span><br></pre></td></tr></table></figure>
+<p> <img src="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-18下午8.29.35.png" alt></p>
+<p>By default, categorical vaiables are handled by converting them to <code>&quot;Treatment Coding&quot;</code></p>
+<p><code>Intercept</code> corresponds to what we called the “mean of the baseline group” and <code>C(is_setosa)[T.True]</code> corresponds to what we called the “effect of the <code>is_setosa</code> factor”.</p>
+<h4 id="Multiway-Categorical-Linear-Model"><a href="#Multiway-Categorical-Linear-Model" class="headerlink" title="Multiway Categorical Linear Model"></a>Multiway Categorical Linear Model</h4><h5 id="Prediction"><a href="#Prediction" class="headerlink" title="Prediction"></a>Prediction</h5><p>Define a function, <code>make_predictions_twoway</code>,<br>that takes as its first two arguments two <code>Series</code> of factor indices,<br>one for the first factor and one for the second factor,<br>and an <code>np.ndarray</code> of <code>group_means</code> as its third argument,<br>and returns a <code>Series</code> of predictions from the two-way categorical model<br>with those <code>group_means</code> as its parameters.</p>
+<p>The index for factor 1 should be used to select the row of <code>group_means</code>,<br>while the index for factor 2 should be used to select the column.</p>
+<p>So if the <code>group_means</code> were the array</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line"> [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]]</span><br></pre></td></tr></table></figure>
+<p>then <code>make_predictions_twoway</code> would return</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.Series([<span class="number">0</span>, <span class="number">1</span>, <span class="number">5</span>])</span><br></pre></td></tr></table></figure>
+<p>on the inputs</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.Series([<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]), pd.Series([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_predictions_twoway</span><span class="params">(factor1, factor2, group_means)</span>:</span></span><br><span class="line">    predictions = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(factor1)):</span><br><span class="line">        predictions.append(group_means[factor1[i], factor2[i]])</span><br><span class="line">    <span class="keyword">return</span> pd.Series(predictions)</span><br></pre></td></tr></table></figure>
+<h5 id="Model-Enconding"><a href="#Model-Enconding" class="headerlink" title="Model Enconding"></a>Model Enconding</h5><p><strong>Encoding Multiway Categorical Data</strong></p>
+<p>In the linear model encoding of data for categorical models,including multiway models,<br>each data point is still represented by a <code>Series</code> beginning with <code>1</code>.</p>
+<p>The other entries of the <code>Series</code> are all <code>1</code> or <code>0</code>. As with a one-way model, the length of the <code>Series</code> is equal to the total number of groups. In addition to starting with a <code>1</code>, there are <code>1</code>s to indicate whether this data point comes from a non-zero level of each factor and if it comes from a given _combination_ of non-zero levels, as in</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, int(factor1_idx == <span class="number">1</span>), int(factor1_idx == <span class="number">2</span>), ...</span><br><span class="line">int(factor2_idx == <span class="number">1</span>),  int(factor2_idx == <span class="number">2</span>), ...</span><br><span class="line">int((factor1_idx == <span class="number">1</span>) &amp; (factor2_idx == <span class="number">1</span>)), ... </span><br><span class="line">int((factor1_idx == J) &amp; (factor2_idx == K))]</span><br></pre></td></tr></table></figure>
+<p>for a a model with two factors with total numbers of factor levels <code>J</code> and <code>K</code>.</p>
+<p>We will focus on the simplest case: a multiway model with two factors, each of which has two levels. We will call such a model a _two-by-two_ model. If there are two levels of each two factors, for a total of four groups, a datapoint from level 0 of both factors would be coded as</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<p>and one from level 1 of both factors would be coded as</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p>while a datapoint from level 1 of factor 1 and level 0 of factor 2 would be coded as</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encode_data_twobytwo</span><span class="params">(factor1_idx, factor2_idx)</span>:</span></span><br><span class="line">    encoded = [<span class="number">1</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">4</span>)]</span><br><span class="line">    encoded[<span class="number">1</span>] = factor1_idx == <span class="number">1</span></span><br><span class="line">    encoded[<span class="number">2</span>] = factor2_idx == <span class="number">1</span></span><br><span class="line">    encoded[<span class="number">3</span>] = encoded[<span class="number">1</span>] <span class="keyword">and</span> encoded[<span class="number">2</span>]</span><br><span class="line">    <span class="keyword">return</span> encoded</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encode_data_twobytwo_model</span><span class="params">(factor1_idxs, factor2_idxs)</span>:</span></span><br><span class="line">    encodes = []</span><br><span class="line">    <span class="keyword">for</span> fac1_idx, fac2_idx <span class="keyword">in</span> zip(factor1_idxs, factor2_idxs):</span><br><span class="line">        encodes.append(encode_data_twobytwo(fac1_idx, fac2_idx))</span><br><span class="line">    <span class="keyword">return</span> pd.DataFrame(encodes)</span><br></pre></td></tr></table></figure>
+<p><strong>Encoding Multiway Categorical Parameters</strong></p>
+<p>When the inputs to categorical models are written in the linear model encoding, the outputs are computed in the same way as or the alternate encoding of a linear regression model:</p>
+<script type="math/tex; mode=display">
+\text{prediction} = \text{parameters}[0]\cdot\text{data features}[0] + \text{parameters}[1]\cdot\text{data features}[1] ...</script><p>Again, $\text{data features}[0]$ is always <code>1</code>. In categorical models, instead of the $\text{data features}$ being the observed value, they are instead <code>0</code> or <code>1</code> to indicate to which groups the data point belonged, as levels and combinations of levels from each factor.</p>
+<p>For a two by two model, then, the prediction for the observations in level 0 of both facors, aka the baseline group, is</p>
+<script type="math/tex; mode=display">
+\text{prediction for factor levels 0, 0} = \text{parameters}[0] = \text{group means}[0, 0]</script><p>while that for an observation in level 1 of both factors is</p>
+<script type="math/tex; mode=display">
+\text{prediction for factor levels 1, 1} = \text{parameters}[0] + \text{parameters}[1] + \text{parameters}[2] + \text{parameters}[3] = \text{group means}[1, 1]</script><p>and so</p>
+<script type="math/tex; mode=display">
+\text{parameters}[3] = \text{group means}[1, 1] - \text{parameters}[2] - \text{parameters}[1] - \text{parameters}[0]</script><p>which is what we called the “interaction of the factors” when working with categorical models in the mean parameterization.</p>
+<p>In general, when we computed effects and interactions in categorical models, we compared the <code>group_means</code> to each other.<br>When the inputs to categorical models are written in the linear model encoding, the parameters are directly in terms of the effects and interactions.</p>
+<p>As a concrete example, for a collection of <code>group_means</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line"> [<span class="number">1</span>, <span class="number">4</span>]]</span><br></pre></td></tr></table></figure>
+<p>the corresponding <code>parameters</code> are</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encode_parameters_twobytwo_model</span><span class="params">(group_means)</span>:</span></span><br><span class="line">    p0 = group_means[<span class="number">0</span>,<span class="number">0</span>]</span><br><span class="line">    p1 = group_means[<span class="number">1</span>,<span class="number">0</span>] - group_means[<span class="number">0</span>,<span class="number">0</span>]</span><br><span class="line">    p2 = group_means[<span class="number">0</span>,<span class="number">1</span>] - group_means[<span class="number">0</span>,<span class="number">0</span>]</span><br><span class="line">    p3 = group_means[<span class="number">1</span>,<span class="number">1</span>] - p2 - p1 - p0</span><br><span class="line">    <span class="keyword">return</span> pd.Series([p0, p1, p2, p3])</span><br></pre></td></tr></table></figure>
+<h4 id="Build-Interacting-Models"><a href="#Build-Interacting-Models" class="headerlink" title="Build Interacting Models"></a>Build Interacting Models</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> pm.Model() <span class="keyword">as</span> combined_glm_model:</span><br><span class="line">    combined_glm = pm.GLM.from_formula(<span class="string">"sepal_length ~ 1 + sepal_width + 		 									C(is_setosa) + sepal_width:C(is_setosa)"</span>,</span><br><span class="line">        						data=iris_df)</span><br></pre></td></tr></table></figure>
+<p>In this case, an “interaction” means that the slope of the line is different for setosas and non-setosas, in addition to the intercept being different.</p>
+<h2 id="Lecture-11-Over-Fitting-and-Cross-Validation"><a href="#Lecture-11-Over-Fitting-and-Cross-Validation" class="headerlink" title="Lecture 11 Over-Fitting and Cross-Validation"></a>Lecture 11 Over-Fitting and Cross-Validation</h2><p>If we use $R^2$ as our criteria, then MLE will always be winner since MLE parameters “explain” the data as best as possible.</p>
+<p>But the goal of our task is not just to explain the data but to predict data</p>
+<h3 id="Linearization"><a href="#Linearization" class="headerlink" title="Linearization"></a>Linearization</h3><p>If two variables <code>x</code>, <code>y</code> do not have linear relationship, we can use a function <code>f(x)</code> to transform one variable so that they can have linear relationship.</p>
+<ul>
+<li>e.g. y ~ 1/x, f(x) = 1 / x<ul>
+<li>then y ~ f(x), that is y ~ x </li>
+</ul>
+</li>
+</ul>
+<h4 id="Polynomial-Models"><a href="#Polynomial-Models" class="headerlink" title="Polynomial Models"></a>Polynomial Models</h4><p>Any function can be approximated as a weighted sum of polynomial (power) functions:</p>
+<script type="math/tex; mode=display">
+f(x) \approx a + b\cdot x + c\cdot x^2 + d\cdot x^3 \dots</script><h3 id="Cross-Validation"><a href="#Cross-Validation" class="headerlink" title="Cross-Validation"></a>Cross-Validation</h3><p>In cross-validation, the data is split into two pieces: one set for picking parameters with MLE/MAP or getting the posterior and the other set for checking $R^2$ (or a similar metric).</p>
+<p>These are called the _training_ and _testing_ sets: one is used to “train” the model, improving its performance, much like an athlete trains, while the other is used to “test” its performance.</p>
+<h4 id="Leave-One-Out-LOO"><a href="#Leave-One-Out-LOO" class="headerlink" title="Leave One Out (LOO)"></a>Leave One Out (LOO)</h4><p>Only use one data as test set. The advantage of this method is this won’t be influenced by how we split the training and test set and this method uses almost all the data for training. So we can make bias lower.</p>
+<h2 id="Lecture-12-Markov-Chain-and-Monte-Carlo"><a href="#Lecture-12-Markov-Chain-and-Monte-Carlo" class="headerlink" title="Lecture 12 Markov Chain and Monte Carlo"></a>Lecture 12 Markov Chain and Monte Carlo</h2><ul>
+<li>Any method that uses samples to approximate distributions and averages is a Monte Carlo method.</li>
+<li>The method we use to draw samples is called Mrkov Chain sampling</li>
+<li>Using samples from a MRakov Chain to approximate Bayesian posteriors is known as Bayesian Markov Chain Monte Carlo.</li>
+</ul>
+<h3 id="Monte-Carlo-Sampling"><a href="#Monte-Carlo-Sampling" class="headerlink" title="Monte Carlo Sampling"></a>Monte Carlo Sampling</h3><h4 id="Question-How-to-draw-samples-in-a-circle-area"><a href="#Question-How-to-draw-samples-in-a-circle-area" class="headerlink" title="Question: How to draw samples in a circle area"></a>Question: How to draw samples in a circle area</h4><ul>
+<li>We can mimic the <em>diffusion effect</em> that a drop of ink will have in a plate of water</li>
+</ul>
+<h5 id="Core-Idea"><a href="#Core-Idea" class="headerlink" title="Core Idea"></a>Core Idea</h5><ol>
+<li>We initial the first point that in the circle</li>
+<li>On each step, we adjust the position of our point a samll amount</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">collision_result</span><span class="params">(starting_point)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> starting_point + <span class="number">0.2</span> * np.random.standard_normal(size=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>Repeat step 2 and check if the point is in the circle</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sample_from_circle_diffusion</span><span class="params">(circle_checker, init, collider, n)</span>:</span></span><br><span class="line">    <span class="keyword">assert</span> is_in_circle(*init)  <span class="comment"># make sure we start in the circle</span></span><br><span class="line">    current = init  <span class="comment"># drop in the dye</span></span><br><span class="line">        </span><br><span class="line">    samples = [current]</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="comment"># simulate a collision</span></span><br><span class="line">        possible_next = collider(current)</span><br><span class="line">        <span class="comment"># make sure the collision didn't take us outside the circle</span></span><br><span class="line">        <span class="keyword">if</span> is_in_circle(*possible_next):</span><br><span class="line">            <span class="comment"># and if it didn't, we've got our new current position</span></span><br><span class="line">            current = possible_next</span><br><span class="line">        samples.append(current)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> np.array(samples)</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-19上午11.25.40.png" alt></p>
+<p>By running this function we can see the program is exploring the circle</p>
+<h5 id="Trace"><a href="#Trace" class="headerlink" title="Trace"></a>Trace</h5><p>Trace is a visualization of a sampler’s trajectory focuses on one variable at a time</p>
+<p><img src="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-19上午11.27.08.png" alt="trace"></p>
+<p>Notice the relatively slow motion of the particle: when it is at an extremely positive or negative value (close to -1 and 1), it will tend to stay near that value for tens of steps. This is visible as a “waviness” of the trajectory.</p>
+<p>If we shuffle the data, the “wave” will disappear and the trace will become:</p>
+<p><img src="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-19上午11.31.54.png" alt></p>
+<p>Because we use Markov Chain to make points, each point will correlate with the points some steps ahead.</p>
+<p>The correlation between values as a function of the time-lag between them is known as the <em>autocorrelation</em>.</p>
+<p><img src="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-19上午11.34.43.png" alt></p>
+<p><strong>Auto-correlation is bad for a sampler:it can be shown that the higher this auto-correlation, the worse our Monte Carlo estimates will be.</strong></p>
+<h3 id="Eliminating-Auto-correlation-—-Metropolis-Hastings"><a href="#Eliminating-Auto-correlation-—-Metropolis-Hastings" class="headerlink" title="Eliminating Auto-correlation — $Metropolis-Hastings$"></a>Eliminating Auto-correlation — $Metropolis-Hastings$</h3><p>Metropolis-Hasting is a generalized version of the diffusion used above</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">metropolis_hastings</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    logp,  # where previously we had in_circle, we now have logp</span></span></span><br><span class="line"><span class="function"><span class="params">    init,</span></span></span><br><span class="line"><span class="function"><span class="params">    proposer,  # where previously we had a <span class="string">"collider"</span>, now we have a <span class="string">"proposer"</span></span></span></span><br><span class="line"><span class="function"><span class="params">    n)</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># we specify an initial point,</span></span><br><span class="line">    <span class="comment">#  the equivalent of dropping in the dye</span></span><br><span class="line">    current = init </span><br><span class="line">    samples = [current]</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="comment"># then we propose the next value</span></span><br><span class="line">        proposal = proposer(current)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># then we use a criterion to choose whether to keep it or not</span></span><br><span class="line">        <span class="comment">#  and this criterion is based on the log-probability</span></span><br><span class="line">        current = metropolis_criterion(logp, current, proposal)</span><br><span class="line">        </span><br><span class="line">        samples.append(current)  </span><br><span class="line">    <span class="keyword">return</span> np.array(samples)</span><br></pre></td></tr></table></figure>
+<p><strong>The biggest difference is that acceptance criterion is soft, insead of hard</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">metropolis_criterion</span><span class="params">(logp, current, proposal)</span>:</span></span><br><span class="line">    p_current = np.exp(logp(current))</span><br><span class="line">    p_proposal = np.exp(logp(proposal))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># if the proposal has higher probability than the current,</span></span><br><span class="line">    <span class="comment">#  or if it has a ratio of probabilities larger a random value,</span></span><br><span class="line">    <span class="comment">#  accept</span></span><br><span class="line">    <span class="keyword">if</span> (p_proposal / p_current) &gt; pm.Uniform.dist().random():</span><br><span class="line">        <span class="keyword">return</span> proposal</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> current</span><br></pre></td></tr></table></figure>
+<h4 id="Metropolis-Hastings-type-alogorithms-help-us-ample-from-posteriors"><a href="#Metropolis-Hastings-type-alogorithms-help-us-ample-from-posteriors" class="headerlink" title="Metropolis-Hastings-type alogorithms help us ample from posteriors"></a>Metropolis-Hastings-type alogorithms help us ample from posteriors</h4><p>The goal of Markov Chain Monte Carlo is not just to sample uniformly from simple shapes like the circle.</p>
+<p>Instead, the goal is to sample from interesting distributions that we can’t write down,<br>like the posterior of a complicated model.</p>
+<p>One of the major benefits of the Metropolis-Hastings algorithm comes from the fact that it uses a _ratio_ of probabilities.</p>
+<p>First, consider the definition of the posterior from Bayes’ Rule:</p>
+<script type="math/tex; mode=display">
+p(\text{params}\vert\text{data}) = \frac{p(\text{data}\vert\text{params}) p(\text{params})}{p(\text{data})}</script><p>The troublesome part of this equation is the denominator. The numerator is part of our modeling process: it has the likelihood and the prior (in that order).</p>
+<p>Now let’s consider comparing two possible values of the params, $A$ and $B$:</p>
+<script type="math/tex; mode=display">
+p(\text{params = A}\vert\text{data}) = \frac{p(\text{data}\vert\text{params = A}) p(\text{params = A})}{p(\text{data})}</script><script type="math/tex; mode=display">
+p(\text{params = B}\vert\text{data}) = \frac{p(\text{data}\vert\text{params = B}) p(\text{params = B})}{p(\text{data})}</script><p>If we take the ratio of the probabilities, we get a complicated-looking expression:</p>
+<script type="math/tex; mode=display">
+\frac{p(\text{params = A}\vert\text{data})}{p(\text{params = B}\vert\text{data})} =
+\frac{\frac{p(\text{data}\vert\text{params = A}) p(\text{params = A})}{p(\text{data})}}{\frac{p(\text{data}\vert\text{params = B}) p(\text{params = B})}{p(\text{data})}}</script><p>But it simplifies, because $p(\text{data})$ is in the denominator of both the top and bottom:</p>
+<script type="math/tex; mode=display">
+\frac{p(\text{params = A}\vert\text{data})}{p(\text{params = B}\vert\text{data})} =
+\frac{p(\text{data}\vert\text{params = A}) p(\text{params = A})}{p(\text{data}\vert\text{params = B}) p(\text{params = B)}}</script><p>This is only in terms of the likelihood and prior!</p>
+<p>The trace of this method looks like above</p>
+<p><img src="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-19上午11.52.37.png" alt></p>
+<p>Because our initial guess had low posterior probability, there was a brief period in which our samples were slightly “off”.This period is known as the “burn-in” time of our sampler.</p>
+<p>And auto-correlation looks like:</p>
+<p><img src="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-19上午11.53.53.png" alt></p>
+<h3 id="pyMC-combines-the-model-specification-API-we’ve-worked-with-throughout-the-semester-with-very-sophisticated-versions-of-Metropolis-Hastings"><a href="#pyMC-combines-the-model-specification-API-we’ve-worked-with-throughout-the-semester-with-very-sophisticated-versions-of-Metropolis-Hastings" class="headerlink" title="pyMC combines the model-specification API we’ve worked with throughout the semester with _very_ sophisticated versions of Metropolis-Hastings."></a>pyMC combines the model-specification API we’ve worked with throughout the semester with _very_ sophisticated versions of Metropolis-Hastings.</h3><p><img src="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-19上午11.50.18.png" alt></p>
+<p>The auto-correlation from pyMC is low and the trace seems more independent</p>
+<p><img src="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/截屏2019-12-19上午11.50.26.png" alt></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Data-Science/" rel="tag"># Data Science</a>
+            
+              <a href="/tags/Berkeley-Course/" rel="tag"># Berkeley Course</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-1/" rel="next" title="Data Science for Research Psychology Lecture Notes Part 1">
+                  <i class="fa fa-chevron-left"></i> Data Science for Research Psychology Lecture Notes Part 1
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-07-Categorical-Effects"><span class="nav-number">2.</span> <span class="nav-text">Lecture 07 Categorical Effects</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mixture-Distribution"><span class="nav-number">2.1.</span> <span class="nav-text">Mixture Distribution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Categorical-Effects-Models"><span class="nav-number">2.2.</span> <span class="nav-text">Categorical Effects Models</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ANOVA-Model"><span class="nav-number">2.2.1.</span> <span class="nav-text">ANOVA Model</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis-of-Variance"><span class="nav-number">2.3.</span> <span class="nav-text">Analysis of Variance</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Implict-Model-in-ANOVA"><span class="nav-number">2.3.1.</span> <span class="nav-text">Implict Model in ANOVA</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F-Statistic"><span class="nav-number">2.4.</span> <span class="nav-text">$F$ Statistic</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#When-to-use-ANOVA"><span class="nav-number">2.4.1.</span> <span class="nav-text">When to use ANOVA</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-08-Muti-way-Modeling"><span class="nav-number">3.</span> <span class="nav-text">Lecture 08 Muti-way Modeling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Randomness"><span class="nav-number">3.1.</span> <span class="nav-text">Randomness</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-Posterior-to-See-Effects"><span class="nav-number">3.2.</span> <span class="nav-text">Use Posterior to See Effects</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">3.2.1.</span> <span class="nav-text"> </span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#See-factors’-effect-separately"><span class="nav-number">3.2.2.</span> <span class="nav-text">See factors’ effect separately</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#See-two-factors’-interaction"><span class="nav-number">3.2.3.</span> <span class="nav-text">See two factors’ interaction</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#No-Interaction"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">No Interaction</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Compute-Interaction"><span class="nav-number">3.2.3.2.</span> <span class="nav-text">Compute Interaction</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-09-Regression"><span class="nav-number">4.</span> <span class="nav-text">Lecture 09 Regression</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Categorical-Model"><span class="nav-number">4.1.</span> <span class="nav-text">Categorical Model</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#We-can-use-mean-as-predictor-for-categorical-model-with-a-Normal-likelihood"><span class="nav-number">4.1.0.1.</span> <span class="nav-text">We can use mean as predictor for categorical model with a Normal likelihood</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Numerical-Regression-Model-Linear-Regression"><span class="nav-number">4.2.</span> <span class="nav-text">Numerical Regression Model(Linear Regression)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Basic-Idea"><span class="nav-number">4.2.1.</span> <span class="nav-text">Basic Idea:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Solution"><span class="nav-number">4.2.2.</span> <span class="nav-text">Solution:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Build-Model"><span class="nav-number">4.2.2.1.</span> <span class="nav-text">Build Model</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Make-Predictions"><span class="nav-number">4.2.2.2.</span> <span class="nav-text">Make Predictions</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Linear-Regression-Model"><span class="nav-number">4.2.3.</span> <span class="nav-text">Linear Regression Model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Logistic-Regression-Model"><span class="nav-number">4.2.4.</span> <span class="nav-text">Logistic Regression Model</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deeper-Discuss-of-Linear-Model"><span class="nav-number">4.3.</span> <span class="nav-text">Deeper Discuss of Linear Model</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Log-Probabilities"><span class="nav-number">4.3.1.</span> <span class="nav-text">Log Probabilities</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Maximum-Likelihood-Estimation"><span class="nav-number">4.3.1.1.</span> <span class="nav-text">Maximum Likelihood Estimation</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Measure-the-Performance"><span class="nav-number">4.3.2.</span> <span class="nav-text">Measure the Performance</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Variance-Explained"><span class="nav-number">4.3.2.1.</span> <span class="nav-text">Variance Explained</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#R-2-Correlation"><span class="nav-number">4.3.2.2.</span> <span class="nav-text">$R^2$(Correlation)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#z-scoring​-standardize"><span class="nav-number">4.3.3.</span> <span class="nav-text">z-scoring​(standardize)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Meature-the-Correlation"><span class="nav-number">4.3.4.</span> <span class="nav-text">Meature the Correlation</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ROPE-Region-of-Practical-Equivalence"><span class="nav-number">4.3.4.1.</span> <span class="nav-text">ROPE: Region of Practical Equivalence</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ridge-Regression"><span class="nav-number">4.3.5.</span> <span class="nav-text">Ridge Regression</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LASSO-Regression"><span class="nav-number">4.3.6.</span> <span class="nav-text">LASSO Regression</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#If-our-data-is-not-Normal-we-can-use-a-different-likelihood"><span class="nav-number">4.3.7.</span> <span class="nav-text">If our data is not Normal, we can use a different likelihood</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Solution-Robust-Regression"><span class="nav-number">4.3.7.1.</span> <span class="nav-text">Solution: Robust Regression</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-10-Formulas-and-Linear-Models"><span class="nav-number">5.</span> <span class="nav-text">Lecture 10 Formulas and Linear Models</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Building-Models-with-Formulas"><span class="nav-number">5.1.</span> <span class="nav-text">Building Models with Formulas</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Build-Categorical-Model-with-Formula"><span class="nav-number">5.1.1.</span> <span class="nav-text">Build Categorical Model with Formula</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Multiway-Categorical-Linear-Model"><span class="nav-number">5.1.2.</span> <span class="nav-text">Multiway Categorical Linear Model</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Prediction"><span class="nav-number">5.1.2.1.</span> <span class="nav-text">Prediction</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Model-Enconding"><span class="nav-number">5.1.2.2.</span> <span class="nav-text">Model Enconding</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Build-Interacting-Models"><span class="nav-number">5.1.3.</span> <span class="nav-text">Build Interacting Models</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-11-Over-Fitting-and-Cross-Validation"><span class="nav-number">6.</span> <span class="nav-text">Lecture 11 Over-Fitting and Cross-Validation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linearization"><span class="nav-number">6.1.</span> <span class="nav-text">Linearization</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Polynomial-Models"><span class="nav-number">6.1.1.</span> <span class="nav-text">Polynomial Models</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cross-Validation"><span class="nav-number">6.2.</span> <span class="nav-text">Cross-Validation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Leave-One-Out-LOO"><span class="nav-number">6.2.1.</span> <span class="nav-text">Leave One Out (LOO)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-12-Markov-Chain-and-Monte-Carlo"><span class="nav-number">7.</span> <span class="nav-text">Lecture 12 Markov Chain and Monte Carlo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Monte-Carlo-Sampling"><span class="nav-number">7.1.</span> <span class="nav-text">Monte Carlo Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Question-How-to-draw-samples-in-a-circle-area"><span class="nav-number">7.1.1.</span> <span class="nav-text">Question: How to draw samples in a circle area</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Core-Idea"><span class="nav-number">7.1.1.1.</span> <span class="nav-text">Core Idea</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Trace"><span class="nav-number">7.1.1.2.</span> <span class="nav-text">Trace</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Eliminating-Auto-correlation-—-Metropolis-Hastings"><span class="nav-number">7.2.</span> <span class="nav-text">Eliminating Auto-correlation — $Metropolis-Hastings$</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Metropolis-Hastings-type-alogorithms-help-us-ample-from-posteriors"><span class="nav-number">7.2.1.</span> <span class="nav-text">Metropolis-Hastings-type alogorithms help us ample from posteriors</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pyMC-combines-the-model-specification-API-we’ve-worked-with-throughout-the-semester-with-very-sophisticated-versions-of-Metropolis-Hastings"><span class="nav-number">7.3.</span> <span class="nav-text">pyMC combines the model-specification API we’ve worked with throughout the semester with _very_ sophisticated versions of Metropolis-Hastings.</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.png"
+      alt="Xiao Liu">
+  <p class="site-author-name" itemprop="name">Xiao Liu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/haroldliuj" title="GitHub &rarr; https://github.com/haroldliuj" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:haroldliuj@gmail.com" title="E-Mail &rarr; mailto:haroldliuj@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiao Liu</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'FoLSl7NpGs5fSxnb59tfNULA-gzGzoHsz',
+    appKey: 'Yl577c0mRRb9AIFa03rdU8c1',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
