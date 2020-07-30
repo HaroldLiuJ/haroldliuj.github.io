@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="IntroductionThis is my reading notes for Gao et al’s Neural Approaches to Conversational AI. I just marked something I think is important and made the structure more logistic clear. Since I just read">
+<meta name="keywords" content="NLP,Paper Reading">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Neural Approaches to Conversational AI Reading Notes">
+<meta property="og:url" content="http://yoursite.com/2020/07/30/Conversational-AI/index.html">
+<meta property="og:site_name" content="Xiao Liu&#39;s Blog">
+<meta property="og:description" content="IntroductionThis is my reading notes for Gao et al’s Neural Approaches to Conversational AI. I just marked something I think is important and made the structure more logistic clear. Since I just read">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2020/07/30/Conversational-AI/cast.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/30/Conversational-AI/mdp.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/30/Conversational-AI/mdp1.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/30/Conversational-AI/IMG_0798.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/07/30/Conversational-AI/irn.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/30/Conversational-AI/image-20200729112446613.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/30/Conversational-AI/image-20200729165803459.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/30/Conversational-AI/image-20200729172449097.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/30/Conversational-AI/image-20200730111724674.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/30/Conversational-AI/image-20200730165350341.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/30/Conversational-AI/image-20200730170701468.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/30/Conversational-AI/image-20200730171100364.png">
+<meta property="og:updated_time" content="2020-07-30T09:48:31.944Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Neural Approaches to Conversational AI Reading Notes">
+<meta name="twitter:description" content="IntroductionThis is my reading notes for Gao et al’s Neural Approaches to Conversational AI. I just marked something I think is important and made the structure more logistic clear. Since I just read">
+<meta name="twitter:image" content="http://yoursite.com/2020/07/30/Conversational-AI/cast.png">
+  <link rel="canonical" href="http://yoursite.com/2020/07/30/Conversational-AI/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Neural Approaches to Conversational AI Reading Notes | Xiao Liu's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xiao Liu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+        
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-photos">
+      
+    
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>Photos</a>
+
+  </li>
+      
+    
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/30/Conversational-AI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiao Liu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiao Liu's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            Neural Approaches to Conversational AI Reading Notes
+            
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-07-30 17:33:34 / Modified: 17:48:31" itemprop="dateCreated datePublished" datetime="2020-07-30T17:33:34+08:00">2020-07-30</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/English-Articles/" itemprop="url" rel="index">
+                    <span itemprop="name">English Articles</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2020/07/30/Conversational-AI/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/30/Conversational-AI/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This is my reading notes for Gao et al’s Neural Approaches to Conversational AI. I just marked something I think is important and made the structure more logistic clear. Since I just read the paper once, there must be something that I wrongly understood. Feel free to contact me at haroldliuj@gmail if you find something wrong. Have a nice trip!</p><a id="more"></a>
+<h2 id="Dialogue-Hierarchical-Structure"><a href="#Dialogue-Hierarchical-Structure" class="headerlink" title="Dialogue Hierarchical Structure"></a>Dialogue Hierarchical Structure</h2><ul>
+<li>There is a top-level process selects which sub-process should be called.</li>
+</ul>
+<h2 id="Neural-NLP-Tasks"><a href="#Neural-NLP-Tasks" class="headerlink" title="Neural NLP Tasks"></a>Neural NLP Tasks</h2><h3 id="3-Common-Steps"><a href="#3-Common-Steps" class="headerlink" title="3 Common Steps"></a>3 Common Steps</h3><ul>
+<li>Encode symbolic space to neural space</li>
+<li>Reasoning in neural space</li>
+<li>Decode neural space to symbolic space</li>
+</ul>
+<p><img src="/2020/07/30/Conversational-AI/cast.png" alt="cast"></p>
+<h2 id="CH2-Reinforcement-Learning"><a href="#CH2-Reinforcement-Learning" class="headerlink" title="CH2 Reinforcement Learning"></a>CH2 Reinforcement Learning</h2><h3 id="Challenges-of-RL"><a href="#Challenges-of-RL" class="headerlink" title="Challenges of RL"></a>Challenges of RL</h3><ul>
+<li>Exploration-exploitation tradeoff</li>
+<li>Delayed reward and temporal credit assignment</li>
+<li>Partially observed states</li>
+</ul>
+<h3 id="Foundations"><a href="#Foundations" class="headerlink" title="Foundations"></a>Foundations</h3><h4 id="Markov-Decision-Process"><a href="#Markov-Decision-Process" class="headerlink" title="Markov Decision Process"></a><a href="https://zhuanlan.zhihu.com/p/25498081" target="_blank" rel="noopener">Markov Decision Process</a></h4><ul>
+<li>Denotes</li>
+</ul>
+<p><img src="/2020/07/30/Conversational-AI/mdp.png" alt="mdp"></p>
+<ul>
+<li><p>Basic Idea</p>
+<p><img src="/2020/07/30/Conversational-AI/mdp1.png" alt="mdp"></p>
+</li>
+<li><p>Policy $\pi = P(A=a|s=s_t)$ stands for the policy that the agent can adapt.</p>
+</li>
+<li><p>Once we choose the policy, we can compute the reward:</p>
+<script type="math/tex; mode=display">
+G_t=\sum\gamma^kR_{t+k+1}</script><p>However, since $\pi$ is a possibility distribution, we can not use $G_t$ directly as the final score, because is different each time we compute it. So we use <strong>expected value</strong> as our score. So we will define 2 scores, the value of the state and the value of the state with action</p>
+</li>
+<li><p>The Value of the State:</p>
+<script type="math/tex; mode=display">
+V^\pi(s) = E(G_t|s_1=s, a_i \sim \pi(s_i), \forall i > 1 )</script></li>
+<li><p>The Value of the State with Action</p>
+<script type="math/tex; mode=display">
+Q^\pi(s,a) = E(G_t|s_1=s, a_1=a,a_i \sim \pi(s_i), \forall i > 1)</script></li>
+<li><p>Difference between those 2 eqns above:</p>
+<p><img src="/2020/07/30/Conversational-AI/IMG_0798.jpg" alt="IMG_0798"></p>
+</li>
+</ul>
+<h3 id="Q-Learning"><a href="#Q-Learning" class="headerlink" title="Q-Learning"></a>Q-Learning</h3><h4 id="Basic-Idea"><a href="#Basic-Idea" class="headerlink" title="Basic Idea"></a>Basic Idea</h4><ul>
+<li><p>Since we use Q to represent how good the policy can be, so we can find the max Q so that we can find the best policy.</p>
+</li>
+<li><p>Q-Learning : Use “Temporal Difference” to update gradient:</p>
+<script type="math/tex; mode=display">
+\theta \leftarrow \theta+\alpha \underbrace{\left(r+\gamma \max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime} ; \theta\right)-Q(s, a ; \theta)\right)}_{\text {Temporal difference }} \nabla_{\theta} Q(s, a ; \theta)</script></li>
+</ul>
+<h3 id="Policy-Gradient"><a href="#Policy-Gradient" class="headerlink" title="Policy Gradient"></a>Policy Gradient</h3><ul>
+<li>The policy $\pi$ itself is directly parameterized by $\theta \in \R^d$</li>
+</ul>
+<h2 id="CH3-QA-amp-Machine-Reading"><a href="#CH3-QA-amp-Machine-Reading" class="headerlink" title="CH3 QA &amp; Machine Reading"></a>CH3 QA &amp; Machine Reading</h2><h3 id="Steps-for-KB-QA"><a href="#Steps-for-KB-QA" class="headerlink" title="Steps for KB-QA"></a>Steps for KB-QA</h3><ul>
+<li>Semantic Parsing</li>
+<li>Multi-Step Reasoning</li>
+</ul>
+<h3 id="Semantic-Parsing-for-KB-QA"><a href="#Semantic-Parsing-for-KB-QA" class="headerlink" title="Semantic Parsing for KB-QA"></a>Semantic Parsing for KB-QA</h3><h4 id="1-Embedding-based-Methods"><a href="#1-Embedding-based-Methods" class="headerlink" title="1. Embedding-based Methods"></a>1. Embedding-based Methods</h4><ul>
+<li><p>Same as word vectors, semantic vectors are encoded via knowledge base completion, that is, to recognize whether a triple is in KB</p>
+</li>
+<li><p>We can compute the score for a triple to mark how likely the triple will exist in KB:</p>
+<p>$score(s,r,t;\theta) = x_s^TW_rx_t$</p>
+<p>where $x_r$ is the semantic vector. The model will learn $x$ and $W$ simultaneously</p>
+</li>
+</ul>
+<h3 id="Multi-Step-Reasoning-on-KB"><a href="#Multi-Step-Reasoning-on-KB" class="headerlink" title="Multi-Step Reasoning on KB"></a>Multi-Step Reasoning on KB</h3><p>Since not every relation for two entities is represented in KB, we need some way to infer the relations between two entities with the relations we have.</p>
+<h4 id="1-Symbolic-Methods-—-Path-Ranking-Algorithm-PRA"><a href="#1-Symbolic-Methods-—-Path-Ranking-Algorithm-PRA" class="headerlink" title="1. Symbolic Methods —- Path Ranking Algorithm(PRA)"></a>1. Symbolic Methods —- Path Ranking Algorithm(PRA)</h4><ul>
+<li><p>Random walk in KB and find some possible path</p>
+</li>
+<li><p>When given a query $q=(s,r,?)$, search the path that may suitable for $r$, denoted as $B_r=\{\pi_1, \pi_2…\}$</p>
+</li>
+<li><p>Travel those paths and find the candidate target $t$</p>
+</li>
+<li><p>Compute the score of $t$</p>
+<p>$score(q,t) = \sum_{\pi \in B_r}\lambda_\pi P\{t|s, \pi\}$  where  $\lambda_\pi$ is the learned weight</p>
+</li>
+</ul>
+<h4 id="2-Neural-Methods-—-Implicit-ReasoNet"><a href="#2-Neural-Methods-—-Implicit-ReasoNet" class="headerlink" title="2. Neural Methods —- Implicit ReasoNet"></a>2. Neural Methods —- Implicit ReasoNet</h4><p>Intuitive Idea: tell algorithm, “Hey, you should pay some attention on here in KB” for many times</p>
+<p><img src="/2020/07/30/Conversational-AI/irn.png" alt="irn"></p>
+<ul>
+<li><p>Encoder: Encode $s, r$ into semantic vector space</p>
+</li>
+<li><p>Shared Memory $M$: Each vector represents a concept, is embedded from KB</p>
+</li>
+<li><p>Controller: A RNN with attention</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+a_{t, i} &=\frac{\exp \left(\lambda \cos \left(\mathbf{W}_{1}^{\top} \mathbf{m}_{i}, \mathbf{W}_{2}^{\top} \mathbf{s}_{t}\right)\right)}{\sum_{k} \exp \left(\lambda \cos \left(\mathbf{W}_{1}^{\top} \mathbf{m}_{k}, \mathbf{W}_{2}^{\top} \mathbf{s}_{t}\right)\right)} \\
+\mathbf{x}_{t} &=\sum_{i}^{|\mathbf{M}|} a_{t, i} \mathbf{m}_{i} \\
+\mathbf{s}_{t+1} &=g\left(\mathbf{W}_{3}^{\top} \mathbf{s}_{t}+\mathbf{W}_{4}^{\top} \mathbf{x}_{t}\right)
+\end{aligned}</script><ul>
+<li>Compute the how much attention the current state $s_t$ should pay on each concept in $M$</li>
+<li>Compute weighted memory as input of next time step</li>
+<li>Compute next state $s_{t+1}$</li>
+</ul>
+</li>
+</ul>
+<h3 id="Conversational-KB-QA-Agent"><a href="#Conversational-KB-QA-Agent" class="headerlink" title="Conversational KB-QA Agent"></a>Conversational KB-QA Agent</h3><h4 id="1-Common-Architecture"><a href="#1-Common-Architecture" class="headerlink" title="1. Common Architecture"></a>1. Common Architecture</h4><p><img src="/2020/07/30/Conversational-AI/image-20200729112446613.png" alt="image-20200729112446613" style="zoom:150%;"></p>
+<ul>
+<li>Belief Trackers: <ul>
+<li>Resolving coreferences and ellipsis in user utterances using conversational context</li>
+<li>Identifying user intents</li>
+<li>Extracting associated attributes</li>
+<li>Tracking the dialogue state</li>
+</ul>
+</li>
+<li>Interface with KB to query for relevant results</li>
+<li>Beliefs Summary: Summarize the state into a vector</li>
+<li>Dialogue Policy: Selects the next action based on the dialogue state.  </li>
+</ul>
+<h3 id="Machine-Reading-for-Text-QA"><a href="#Machine-Reading-for-Text-QA" class="headerlink" title="Machine Reading for Text-QA"></a>Machine Reading for Text-QA</h3><h4 id="1-Common-Architecture-1"><a href="#1-Common-Architecture-1" class="headerlink" title="1. Common Architecture"></a>1. Common Architecture</h4><ul>
+<li><p>Lexicon Embedding Layer: Maps each word to a vector space using a pre-trained word embedding</p>
+</li>
+<li><p>Contextual Embedding Layer: Utilizes contextual cues from surrounding words to refine the embedding of the words</p>
+<ul>
+<li>e.g. <em>bank of a river</em> vs <em>bank of America</em></li>
+</ul>
+</li>
+<li><p>Attention Layer</p>
+<ul>
+<li>Compute attention for <strong>Passage</strong> through <strong>Questions</strong></li>
+</ul>
+</li>
+<li><p>Reasoning Layer</p>
+<ul>
+<li><p>Single-Step Reasoning</p>
+<ol>
+<li><p>Summarizing question vector:</p>
+<script type="math/tex; mode=display">
+h^q=\sum_i\beta_ih_i^q \\
+\beta = softmax(W^Th_i)</script></li>
+<li><p>Predict start position:</p>
+<script type="math/tex; mode=display">
+p^{(start)} = softmax({h^q}^TW^{(start)}M)</script></li>
+<li><p>Predict end position:</p>
+<script type="math/tex; mode=display">
+\mathbf{p}^{(e n d)}=\operatorname{softmax}\left(\left[\mathbf{h}^{q} ; \sum_{j} p_{j}^{(s t a r t)} \mathbf{m}_{j}\right]^{\top} \mathbf{W}^{(e n d)} \mathbf{M}\right)</script><p>The idea here is integrating question and the answer start position info to predict the end position.</p>
+<p>$\mathbf{M}$ is shared semantic info</p>
+</li>
+</ol>
+</li>
+<li><p>Multi-Step Reasoning</p>
+<ul>
+<li><p>The idea is the same as the single-step reasoning, while multi-step can compute the start and end position over $T$ memory steps and get t start position and end position possibilities with attention. Finally compute the average value of those position possibilities as the final prediction. </p>
+<p><strong>At Each time step t</strong>:</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+\mathbf{p}_{t}^{(s t a r t)}=\operatorname{softmax}\left(\mathbf{s}_{t}^{\top} \mathbf{W}^{(\text {start})} \mathbf{M}\right) \\
+\mathbf{p}_{t}^{(e n d)}=\operatorname{softmax}\left(\left[\mathbf{s}_{t} ; \sum_{j} p_{t, j}^{(s t a r t)} \mathbf{m}_{j}\right]^{\top} \mathbf{W}^{(e n d)} \mathbf{M}\right)\\
+\mathbf{s_t} = RNN(\mathbf{s_{t-1}, x_t})\\
+\mathbf{x_t = \sum_j\gamma_jm_j}\\
+\gamma = \operatorname{softmax(\mathbf{s_{t-1}^\top}W^{(att)}M)}
+\end{array}</script></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="CH4-Task-oriented-Dialogue-Systems"><a href="#CH4-Task-oriented-Dialogue-Systems" class="headerlink" title="CH4 Task-oriented Dialogue Systems"></a>CH4 Task-oriented Dialogue Systems</h2><p>Task-oriented Dialogue is also called slot-fitting, that is there are some predefined slots(essential info that used to finish the task. e.g. <code>num of tickets, departure date</code> for ticket booking) by the domain expert and the goal of the task is to get the information from users and fill the slots so that the system can finish the task. There are two kinds of slots:</p>
+<ul>
+<li>Inform able slots: the value for this slot can be used to constrain the conversation, such as phone number;</li>
+<li>Request able slots:  the speaker can ask for its value, such as ticket price.</li>
+</ul>
+<h3 id="Common-Architecture"><a href="#Common-Architecture" class="headerlink" title="Common Architecture"></a>Common Architecture</h3><p><img src="/2020/07/30/Conversational-AI/image-20200729165803459.png" alt="image-20200729165803459"></p>
+<ul>
+<li>Natural Language Understanding(NLU): Takes user’s raw utterance as input and converts it to the semantic form of dialogue acts.</li>
+<li>Dialogue Manager(DM): The central controller of the system, this module will decide whether the system will interact with the user or with the DB<ul>
+<li>Dialogue State Tracking: track the current dialogue state</li>
+<li>Dialogue Policy</li>
+</ul>
+</li>
+<li>Natural Language Generation(NLG):  If the policy chooses to respond to the user, this module will convert this action</li>
+</ul>
+<h3 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h3><ul>
+<li><p>Categories </p>
+<ul>
+<li><p>task success rate</p>
+</li>
+<li><p>cost of dialogue</p>
+<p><strong>OR</strong></p>
+<ul>
+<li><p>simulation based</p>
+</li>
+<li><p>human based</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Natural-Language-Understanding"><a href="#Natural-Language-Understanding" class="headerlink" title="Natural Language Understanding"></a>Natural Language Understanding</h3><h4 id="1-3-Tasks"><a href="#1-3-Tasks" class="headerlink" title="1. 3 Tasks"></a>1. 3 Tasks</h4><ul>
+<li>Domain detection(classification task)</li>
+<li>Intent determination(classification task)</li>
+<li>Slot tagging(bidirectional LSTM)</li>
+</ul>
+<p>ps: In most cases, they are trained separately while it can be more cost-saving if we train this model jointly</p>
+<h3 id="Dialogue-State-Tracking"><a href="#Dialogue-State-Tracking" class="headerlink" title="Dialogue State Tracking"></a>Dialogue State Tracking</h3><ul>
+<li><p>Dialogue state contains all information about what the user is looking for at the current turn of the conversation.</p>
+</li>
+<li><p>A example Neural Belief Tracker</p>
+<p><img src="/2020/07/30/Conversational-AI/image-20200729172449097.png" alt="image-20200729172449097"></p>
+</li>
+</ul>
+<h3 id="Dialogue-Policy-Learning"><a href="#Dialogue-Policy-Learning" class="headerlink" title="Dialogue Policy Learning"></a>Dialogue Policy Learning</h3><h4 id="1-RL-Method"><a href="#1-RL-Method" class="headerlink" title="1. RL Method"></a>1. RL Method</h4><p>Train a Fully Connected Neural Network to find the Q-Function so that we can use the action correspond to the maximum Q-value to make our decision.</p>
+<ul>
+<li>Input $\mathbf{s}$ contains:<ul>
+<li>one-hot representations of the <strong>dialogue act</strong> and <strong>slot</strong> corresponding to the last user action;</li>
+<li>the same one-hot representations of the <strong>dialogue act</strong> and <strong>slot</strong> corresponding to the last system action;</li>
+<li>a bag of slots corresponding to all previously filled slots in the conversation so far;</li>
+<li>current turn count </li>
+<li><strong>the number of</strong> results from the knowledge base that match the already filled-in constraints for informed slots</li>
+</ul>
+</li>
+<li>Output $\mathbf{q}$ is the predicted Q-Values for corresponded actions</li>
+</ul>
+<p>Since training a network from zero can use great amount of data, we can use <strong>warm start</strong> policy to pretrain the network</p>
+<p>Besides, RL agent should explore and extend slots over using, so we should introduce domain extension tech </p>
+<h4 id="2-Policy-Learning-for-Composite-task-Dialogues"><a href="#2-Policy-Learning-for-Composite-task-Dialogues" class="headerlink" title="2. Policy Learning for Composite-task Dialogues"></a>2. Policy Learning for Composite-task Dialogues</h4><ul>
+<li><p>Composite-task</p>
+<ul>
+<li>User will ask the machine to finish a series of tasks that are correlated to each other. That is, there are <strong>cross-subtask constraints</strong>(e.g. the hotel check in time should be later then the plane arrival time)</li>
+</ul>
+</li>
+<li><p>2 ways to resolve:</p>
+<ul>
+<li><p>Hierarchy Ways: Top level policy will decide with sub-level policy to use</p>
+<p><img src="/2020/07/30/Conversational-AI/image-20200730111724674.png" alt="image-20200730111724674"></p>
+</li>
+<li><p>Feudal Reinforce Leaning: The policy will first decide whether to gather more info or provide info to user, then choose corresponding actions.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-Policy-Learning-for-Multi-Domain-Dialogues"><a href="#3-Policy-Learning-for-Multi-Domain-Dialogues" class="headerlink" title="3. Policy Learning for Multi-Domain Dialogues"></a>3. Policy Learning for Multi-Domain Dialogues</h4><ul>
+<li>Multi-Domain Dialogues<ul>
+<li>There are no cross-task constraints but it still have to maintain a large dialogue states</li>
+</ul>
+</li>
+<li>2 Ways to resolve:<ul>
+<li>Train many policies, then vote for action</li>
+<li>Train many policies which are asked to finish different subtasks and train a picker to decide which policy to use.</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-Integration-of-Planning-and-Learning"><a href="#4-Integration-of-Planning-and-Learning" class="headerlink" title="4. Integration of Planning and Learning"></a>4. Integration of Planning and Learning</h4><ul>
+<li>Planning: Learn from simulator </li>
+<li>Learning: Learn from real user</li>
+<li>Use different weights for simulator and real user</li>
+</ul>
+<h4 id="5-Reward-Function-Learning"><a href="#5-Reward-Function-Learning" class="headerlink" title="5. Reward Function Learning"></a>5. Reward Function Learning</h4><ul>
+<li>Hand write</li>
+<li>Neural network method(may be better than hand write functions)</li>
+</ul>
+<h2 id="CH5-Fully-Data-Driven-Conversation-Model-and-Social-Bots"><a href="#CH5-Fully-Data-Driven-Conversation-Model-and-Social-Bots" class="headerlink" title="CH5 Fully Data-Driven Conversation Model and Social Bots"></a>CH5 Fully Data-Driven Conversation Model and Social Bots</h2><h3 id="End-to-End-Conversation-Models"><a href="#End-to-End-Conversation-Models" class="headerlink" title="End to End Conversation Models"></a>End to End Conversation Models</h3><h4 id="1-HRED"><a href="#1-HRED" class="headerlink" title="1. HRED"></a>1. HRED</h4><p>To exploit longer-term context</p>
+<ul>
+<li><p>Two-level hierarchy structure that combine 2 RNNs: </p>
+<ul>
+<li>One at a word level</li>
+<li>One at the dialogue turn level</li>
+</ul>
+<p><img src="/2020/07/30/Conversational-AI/image-20200730165350341.png" alt="image-20200730165350341"></p>
+</li>
+<li><p>Use this extra dialogue turn level to capture context in conversation level rather than just word level</p>
+</li>
+</ul>
+<h4 id="2-Attention-Models"><a href="#2-Attention-Models" class="headerlink" title="2. Attention Models"></a>2. Attention Models</h4><ul>
+<li>Less effective in E2E dialogue modeling</li>
+</ul>
+<h4 id="3-Pointer-Network-Models"><a href="#3-Pointer-Network-Models" class="headerlink" title="3. Pointer-Network Models"></a>3. Pointer-Network Models</h4><p>The basic idea is to use what has been shown in the context(“Copy and Paste”) </p>
+<ul>
+<li>produces an output sequence consisting of elements from the input sequence:<ul>
+<li>drawn from a fixed-size vocabulary</li>
+<li>selected from the source sequence</li>
+</ul>
+</li>
+</ul>
+<h3 id="Challenges-and-Remedies"><a href="#Challenges-and-Remedies" class="headerlink" title="Challenges and Remedies"></a>Challenges and Remedies</h3><h4 id="1-Response-Blandness"><a href="#1-Response-Blandness" class="headerlink" title="1. Response Blandness"></a>1. Response Blandness</h4><ul>
+<li>The agent will tend to response something less informative such as “I don’t know” for all questions </li>
+<li>Remedies:<ul>
+<li>Maximum Mutual Information<ul>
+<li>Hard to optimize, so just use it at inference time</li>
+<li>Just can mitigate rather than completely eliminates the blandness probles</li>
+</ul>
+</li>
+<li>GAN</li>
+<li>VHERD</li>
+<li>Use retrieval-based method<ul>
+<li>Hard to extend </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-Speaker-Consistency"><a href="#2-Speaker-Consistency" class="headerlink" title="2. Speaker Consistency"></a>2. Speaker Consistency</h4><ul>
+<li><p>Let agent reply with a consist personality</p>
+</li>
+<li><p>Methods:</p>
+<ul>
+<li><p>Combine word vectors with speaker embeddings</p>
+<p><img src="/2020/07/30/Conversational-AI/image-20200730170701468.png" alt="image-20200730170701468"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-Word-Repetitions"><a href="#3-Word-Repetitions" class="headerlink" title="3. Word Repetitions"></a>3. Word Repetitions</h4><ul>
+<li>Remedies:<ul>
+<li>Self-attention</li>
+</ul>
+</li>
+</ul>
+<h3 id="Grounded-Conversational-Models"><a href="#Grounded-Conversational-Models" class="headerlink" title="Grounded Conversational Models"></a>Grounded Conversational Models</h3><ul>
+<li>Let chatbot response base on real world information rather than what is in the training data</li>
+<li>Train an extra Facts Encoder to encode real world info</li>
+</ul>
+<p><img src="/2020/07/30/Conversational-AI/image-20200730171100364.png" alt="image-20200730171100364"></p>
+<h3 id="Reinforcement-Learning-Can-Make-Better-Results"><a href="#Reinforcement-Learning-Can-Make-Better-Results" class="headerlink" title="Reinforcement Learning Can Make Better Results"></a>Reinforcement Learning Can Make Better Results</h3><ul>
+<li><p>Need to find reward function since normally there is no clear goal for users when they are making chitchats</p>
+</li>
+<li><p>Example of reward function, has 3 components:</p>
+<ul>
+<li>$-p(\mathbf{Dull\ Response} | T_i)$: to penalize noninformative response</li>
+<li>$-log\operatorname{Sigmoid cos}(T_{i-1}, T_i)$: to ensure that every response should contain some new information</li>
+<li>$lopp(T_{i-1}|T_i) + logp(T_i|T_i-1)$: to counterbalance the aforementioned two rewards</li>
+</ul>
+</li>
+</ul>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><ul>
+<li>Gao J, Galley M, Li L. Neural approaches to conversational AI[C]//The 41st International ACM SIGIR Conference on Research &amp; Development in Information Retrieval. 2018: 1371-1374.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/NLP/" rel="tag"># NLP</a>
+            
+              <a href="/tags/Paper-Reading/" rel="tag"># Paper Reading</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/12/19/Data-Science-for-Research-Psychology-Lecture-Notes-Part-2/" rel="next" title="Data Science for Research Psychology Lecture Notes Part 2">
+                  <i class="fa fa-chevron-left"></i> Data Science for Research Psychology Lecture Notes Part 2
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dialogue-Hierarchical-Structure"><span class="nav-number">2.</span> <span class="nav-text">Dialogue Hierarchical Structure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Neural-NLP-Tasks"><span class="nav-number">3.</span> <span class="nav-text">Neural NLP Tasks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Common-Steps"><span class="nav-number">3.1.</span> <span class="nav-text">3 Common Steps</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CH2-Reinforcement-Learning"><span class="nav-number">4.</span> <span class="nav-text">CH2 Reinforcement Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Challenges-of-RL"><span class="nav-number">4.1.</span> <span class="nav-text">Challenges of RL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Foundations"><span class="nav-number">4.2.</span> <span class="nav-text">Foundations</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Markov-Decision-Process"><span class="nav-number">4.2.1.</span> <span class="nav-text">Markov Decision Process</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-Learning"><span class="nav-number">4.3.</span> <span class="nav-text">Q-Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Basic-Idea"><span class="nav-number">4.3.1.</span> <span class="nav-text">Basic Idea</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Policy-Gradient"><span class="nav-number">4.4.</span> <span class="nav-text">Policy Gradient</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CH3-QA-amp-Machine-Reading"><span class="nav-number">5.</span> <span class="nav-text">CH3 QA &amp; Machine Reading</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Steps-for-KB-QA"><span class="nav-number">5.1.</span> <span class="nav-text">Steps for KB-QA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Semantic-Parsing-for-KB-QA"><span class="nav-number">5.2.</span> <span class="nav-text">Semantic Parsing for KB-QA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Embedding-based-Methods"><span class="nav-number">5.2.1.</span> <span class="nav-text">1. Embedding-based Methods</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi-Step-Reasoning-on-KB"><span class="nav-number">5.3.</span> <span class="nav-text">Multi-Step Reasoning on KB</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Symbolic-Methods-—-Path-Ranking-Algorithm-PRA"><span class="nav-number">5.3.1.</span> <span class="nav-text">1. Symbolic Methods —- Path Ranking Algorithm(PRA)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Neural-Methods-—-Implicit-ReasoNet"><span class="nav-number">5.3.2.</span> <span class="nav-text">2. Neural Methods —- Implicit ReasoNet</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conversational-KB-QA-Agent"><span class="nav-number">5.4.</span> <span class="nav-text">Conversational KB-QA Agent</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Common-Architecture"><span class="nav-number">5.4.1.</span> <span class="nav-text">1. Common Architecture</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Machine-Reading-for-Text-QA"><span class="nav-number">5.5.</span> <span class="nav-text">Machine Reading for Text-QA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Common-Architecture-1"><span class="nav-number">5.5.1.</span> <span class="nav-text">1. Common Architecture</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CH4-Task-oriented-Dialogue-Systems"><span class="nav-number">6.</span> <span class="nav-text">CH4 Task-oriented Dialogue Systems</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Common-Architecture"><span class="nav-number">6.1.</span> <span class="nav-text">Common Architecture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Evaluation"><span class="nav-number">6.2.</span> <span class="nav-text">Evaluation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Natural-Language-Understanding"><span class="nav-number">6.3.</span> <span class="nav-text">Natural Language Understanding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-Tasks"><span class="nav-number">6.3.1.</span> <span class="nav-text">1. 3 Tasks</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dialogue-State-Tracking"><span class="nav-number">6.4.</span> <span class="nav-text">Dialogue State Tracking</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dialogue-Policy-Learning"><span class="nav-number">6.5.</span> <span class="nav-text">Dialogue Policy Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-RL-Method"><span class="nav-number">6.5.1.</span> <span class="nav-text">1. RL Method</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Policy-Learning-for-Composite-task-Dialogues"><span class="nav-number">6.5.2.</span> <span class="nav-text">2. Policy Learning for Composite-task Dialogues</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Policy-Learning-for-Multi-Domain-Dialogues"><span class="nav-number">6.5.3.</span> <span class="nav-text">3. Policy Learning for Multi-Domain Dialogues</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Integration-of-Planning-and-Learning"><span class="nav-number">6.5.4.</span> <span class="nav-text">4. Integration of Planning and Learning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Reward-Function-Learning"><span class="nav-number">6.5.5.</span> <span class="nav-text">5. Reward Function Learning</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CH5-Fully-Data-Driven-Conversation-Model-and-Social-Bots"><span class="nav-number">7.</span> <span class="nav-text">CH5 Fully Data-Driven Conversation Model and Social Bots</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#End-to-End-Conversation-Models"><span class="nav-number">7.1.</span> <span class="nav-text">End to End Conversation Models</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-HRED"><span class="nav-number">7.1.1.</span> <span class="nav-text">1. HRED</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Attention-Models"><span class="nav-number">7.1.2.</span> <span class="nav-text">2. Attention Models</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Pointer-Network-Models"><span class="nav-number">7.1.3.</span> <span class="nav-text">3. Pointer-Network Models</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Challenges-and-Remedies"><span class="nav-number">7.2.</span> <span class="nav-text">Challenges and Remedies</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Response-Blandness"><span class="nav-number">7.2.1.</span> <span class="nav-text">1. Response Blandness</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Speaker-Consistency"><span class="nav-number">7.2.2.</span> <span class="nav-text">2. Speaker Consistency</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Word-Repetitions"><span class="nav-number">7.2.3.</span> <span class="nav-text">3. Word Repetitions</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Grounded-Conversational-Models"><span class="nav-number">7.3.</span> <span class="nav-text">Grounded Conversational Models</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reinforcement-Learning-Can-Make-Better-Results"><span class="nav-number">7.4.</span> <span class="nav-text">Reinforcement Learning Can Make Better Results</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#References"><span class="nav-number">7.5.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.png"
+      alt="Xiao Liu">
+  <p class="site-author-name" itemprop="name">Xiao Liu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/haroldliuj" title="GitHub &rarr; https://github.com/haroldliuj" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:haroldliuj@gmail.com" title="E-Mail &rarr; mailto:haroldliuj@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiao Liu</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'FoLSl7NpGs5fSxnb59tfNULA-gzGzoHsz',
+    appKey: 'Yl577c0mRRb9AIFa03rdU8c1',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
