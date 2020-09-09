@@ -55,22 +55,22 @@
   };
 </script>
 
-  <meta name="description" content="IntroductionThis is my reading notes for Yin J, Wang J’s A Dirichlet Multinomial Mixture model-based approach for short text clustering. I explained the main idea of this paper and summarized the pape">
+  <meta name="description" content="IntroductionThis blog will give a simple explanation of BERT and its variants’(Mainly focus on variants) main idea and how these models improve base on its training process.">
 <meta name="keywords" content="NLP,Paper Reading">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Gibbs Sampling for Dirichlet Multinomial Mixture Reading Notes">
-<meta property="og:url" content="http://yoursite.com/2020/08/17/GSDMM/index.html">
+<meta property="og:title" content="Intention Recognization - BERT &amp; BERT Variants">
+<meta property="og:url" content="http://yoursite.com/2020/09/09/bert/index.html">
 <meta property="og:site_name" content="Xiao Liu&#39;s Blog">
-<meta property="og:description" content="IntroductionThis is my reading notes for Yin J, Wang J’s A Dirichlet Multinomial Mixture model-based approach for short text clustering. I explained the main idea of this paper and summarized the pape">
+<meta property="og:description" content="IntroductionThis blog will give a simple explanation of BERT and its variants’(Mainly focus on variants) main idea and how these models improve base on its training process.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/2020/08/17/GSDMM/image-20200803173939578.png">
-<meta property="og:image" content="http://yoursite.com/2020/08/17/GSDMM/A%20Dirichlet%20Multinomial%20Mixture%20Model-based%20Approach%20for.png">
-<meta property="og:updated_time" content="2020-08-17T05:07:52.200Z">
+<meta property="og:image" content="http://yoursite.com/2020/09/09/bert/m1.png">
+<meta property="og:image" content="http://yoursite.com/2020/09/09/bert/m2.png">
+<meta property="og:updated_time" content="2020-09-09T09:11:31.571Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Gibbs Sampling for Dirichlet Multinomial Mixture Reading Notes">
-<meta name="twitter:description" content="IntroductionThis is my reading notes for Yin J, Wang J’s A Dirichlet Multinomial Mixture model-based approach for short text clustering. I explained the main idea of this paper and summarized the pape">
-<meta name="twitter:image" content="http://yoursite.com/2020/08/17/GSDMM/image-20200803173939578.png">
-  <link rel="canonical" href="http://yoursite.com/2020/08/17/GSDMM/">
+<meta name="twitter:title" content="Intention Recognization - BERT &amp; BERT Variants">
+<meta name="twitter:description" content="IntroductionThis blog will give a simple explanation of BERT and its variants’(Mainly focus on variants) main idea and how these models improve base on its training process.">
+<meta name="twitter:image" content="http://yoursite.com/2020/09/09/bert/m1.png">
+  <link rel="canonical" href="http://yoursite.com/2020/09/09/bert/">
 
 
 <script id="page-configurations">
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title>Gibbs Sampling for Dirichlet Multinomial Mixture Reading Notes | Xiao Liu's Blog</title>
+  <title>Intention Recognization - BERT & BERT Variants | Xiao Liu's Blog</title>
   
 
 
@@ -254,7 +254,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/17/GSDMM/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/09/bert/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiao Liu">
@@ -268,7 +268,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            Gibbs Sampling for Dirichlet Multinomial Mixture Reading Notes
+            Intention Recognization - BERT & BERT Variants
             
 
           
@@ -285,7 +285,7 @@
                 
               
 
-              <time title="Created: 2020-08-17 09:28:52 / Modified: 13:07:52" itemprop="dateCreated datePublished" datetime="2020-08-17T09:28:52+08:00">2020-08-17</time>
+              <time title="Created: 2020-09-09 16:55:53 / Modified: 17:11:31" itemprop="dateCreated datePublished" datetime="2020-09-09T16:55:53+08:00">2020-09-09</time>
             </span>
           
             
@@ -340,8 +340,8 @@
       
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2020/08/17/GSDMM/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/17/GSDMM/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/09/09/bert/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/09/09/bert/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -356,46 +356,59 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This is my reading notes for Yin J, Wang J’s <em>A Dirichlet Multinomial Mixture model-based approach for short text clustering</em>. I explained the main idea of this paper and summarized the paper with both the author’s explanations and my understanding. If you want to talk about this paper with me, please contact me at haroldliuj@gmail.com. Have a good trip! </p><a id="more"></a>
-<h1 id="Main-Idea"><a href="#Main-Idea" class="headerlink" title="Main Idea"></a>Main Idea</h1><p>Gibbs Sampling for Dirichlet Multinomial Mixture(GSDMM) is based on Dirichlet Multinomial Mixture. The main idea of this process can be seen as a Movie Group Process, that is, assume a  professor of a movie discussion course plans to divide the students into several groups. She expects the students in the same group have watched more movies of the same, so they would have more things to discuss. The professor asks the students to write down the movies they have watched within several minutes. </p>
-<p>The goal is that students in the same group will share similar interests (similar movie lists), while students in different groups will share different interests.</p>
-<p>First, she or he will randomly assign students to some tables, then she will relocate students with 2 rules.</p>
-<p>There are 2 rules for this process:</p>
-<ul>
-<li>Rule 1: Choose a table with more student</li>
-<li>Rule 2:  Choose a table whose students share similar interests (i.e., watched more movies of the same) with him</li>
-</ul>
-<p>Rule 1 can achieve high Completeness, that is, all members of a ground true group are assigned to the same cluster</p>
-<p>Rule 2 can achieve high Homogeneity, that is, each cluster contains only members of <strong>a</strong> single ground true group </p>
-<h1 id="Foundations"><a href="#Foundations" class="headerlink" title="Foundations"></a>Foundations</h1><h3 id="1-Dirichlet-Multinomial-Mixture"><a href="#1-Dirichlet-Multinomial-Mixture" class="headerlink" title="1. Dirichlet Multinomial Mixture"></a>1. Dirichlet Multinomial Mixture</h3><p>This is a generative model for documents with 2 steps:</p>
-<ul>
-<li><p>Select a cluster $k$ according to the probability distribution of the cluster $p(z=k)$, which is a multinomial distribution with a Dirichlet prior</p>
-</li>
-<li><p>Document $d$ is generated by the selected cluster from distribution $p(d|z = k)$, which is also a multinomial distribution with a Dirichlet prior</p>
-</li>
-<li><p>So the likelihood of the document is:</p>
+        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This blog will give a simple explanation of BERT and its variants’(Mainly focus on variants) main idea and how these models improve base on its training process.</p><a id="more"></a>
+<p>The trending improving methods are divided into 2 teams. The first team is using BERT as (part of) the encoder of other neural networks, that is another network will take BERT output as its input or concatenate BERT output and other network output as some layers’ input to make the final prediction. They often use pre-trained BERT to get some improvement.</p>
+<p>The second team will focus more on the foundation of BERT. They will try to add some pre-training objectives to make BERT get more information of the corpora.</p>
+<p>This blog will summarize some BERT Variants that I recently learned. I will explain the method of the original paper and show the improvement if I think the improvement is obvious.</p>
+<p>If you have any questions, please contact haroldj@gmail.com. Have a nice trip!</p>
+<h1 id="BERT-as-Encoder"><a href="#BERT-as-Encoder" class="headerlink" title="BERT as Encoder"></a>BERT as Encoder</h1><h3 id="1-Semantic-aware-BERT-for-Language-Understanding"><a href="#1-Semantic-aware-BERT-for-Language-Understanding" class="headerlink" title="1. Semantic-aware BERT for Language Understanding"></a>1. Semantic-aware BERT for Language Understanding</h3><p>This paper is presented by Zhuoshen Zhang et al. They hold an argument that although  BERT can learn some semantic knowledge during pertaining, it’s still not enough for BERT to generate a sentence with full semantic information. For example, in the machine reading mission, the question is <code>How many people dose the Greater Los Angeles Area have?</code> The baseline model will give the answer of <code>17.5 million</code> while the true answer is <code>over 17.5 million</code>. So the authors encoded an extra piece of semantic information and combined it with the BERT output to achieve higher performance. The architecture of the model is:</p>
+<p><img src="/2020/09/09/bert/m1.png" alt></p>
+<p>The left side of the model is a pre-trained BERT encoder. The authors added a Semantic Role Labeler(SRL) next to the BERT. This labeler will read the sentence and give out $m$ groups of the semantic role of each token. Each group will go through a GRU encoder. The authors concatenated the $m$ outputs and go through a fully connected layer as the semantic information. This information will concatenate with the BERT output and pass forward to finish the objective.</p>
+<p>This model is having better performance on the tasks which need semantic information. But the model is too huge and the improvement is limited.</p>
+<h3 id="2-Multi-Task-Deep-Neural-Networks-for-Natural-Language-Understanding"><a href="#2-Multi-Task-Deep-Neural-Networks-for-Natural-Language-Understanding" class="headerlink" title="2. Multi-Task Deep Neural Networks for Natural Language Understanding"></a>2. Multi-Task Deep Neural Networks for Natural Language Understanding</h3><p>This paper is presented by Xiaodong Liu et al and this is the current state-of-the-art model in GLUE leader board(2020.5). This model use BERT as <strong>shared context embedding encoder</strong> among several Task Specific Layers. The architecture of the model is:</p>
+<p><img src="/2020/09/09/bert/m2.png" alt></p>
+<p>The authors fine-tuned one BERT across 4 different NLP tasks. The objective is to approximately optimize the sum of all multi-task objectives so that the BERT can have more general knowledge of the language.</p>
+<h1 id="Modifying-Pre-training-Objective"><a href="#Modifying-Pre-training-Objective" class="headerlink" title="Modifying Pre-training Objective"></a>Modifying Pre-training Objective</h1><h3 id="1-STRUCTBERT-Incorporating-Language-Structures-Into-Pre-Training-for-Deep-Language-Understanding"><a href="#1-STRUCTBERT-Incorporating-Language-Structures-Into-Pre-Training-for-Deep-Language-Understanding" class="headerlink" title="1. STRUCTBERT Incorporating Language Structures Into Pre-Training for Deep Language Understanding"></a>1. STRUCTBERT Incorporating Language Structures Into Pre-Training for Deep Language Understanding</h3><p>This paper is presented by Wei Wang et al. They are focusing the same issue as the authors’ of the Semantic-BERT, they argue that BERT does not make the most of underlying language structures. So the authors of this paper came out with 2 new pretraining objectives and got new state-of-the-art performance in a variety of downstream tasks.</p>
+<p>The first new objective is <strong>Word Structural Objective</strong>. Besides Masking words in the original BERT pretraining process, the authors will also randomly shuffle K unmasked words and let the algorithm predict the right word order. Given the randomicity of token shuffling, the word objective is equivalent to maximizing the likelihood of placing every shuffled token in its correct position. More formally, this objective can be formulated as:</p>
 <script type="math/tex; mode=display">
-p(d) = \sum_{k=1}^{K}p(d|z=k)p(z=k)</script></li>
-</ul>
-<h3 id="2-Gibbs-Sampling-for-DMM"><a href="#2-Gibbs-Sampling-for-DMM" class="headerlink" title="2. Gibbs Sampling for DMM"></a>2. Gibbs Sampling for DMM</h3><p>Notations:</p>
-<p><img src="/2020/08/17/GSDMM/image-20200803173939578.png" alt="image-20200803173939578"></p>
-<p><img src="/2020/08/17/GSDMM/A Dirichlet Multinomial Mixture Model-based Approach for.png" alt="A Dirichlet Multinomial Mixture Model-based Approach for"></p>
-<p>More formally, the mathematical expression for the probability distribution of the document $d$ in cluster $z$ is:</p>
+\arg \max _{\theta} \sum \log P\left(\operatorname{pos}_{1}=t_{1}, \operatorname{pos}_{2}=t_{2}, \ldots, \operatorname{pos}_{K}=t_{K} \mid t_{1}, t_{2}, \ldots, t_{K}, \theta\right)</script><p> The authors recommend to randomly shuffle 3 continuous words and shuffle 5% of trigrams are selected for random shuffling.</p>
+<p>The second objective is <strong>Sentence Structural Objective</strong>. They extend the sentence prediction task by predicting both the next sentence and the previous sentence, to make the pre-trained language model aware of the sequential order of the sentences in a bidirectional manner.</p>
+<p>With these two new objectives, BERT can get more semantic information and get new state-of-the-art performance on many tasks. </p>
+<h3 id="2-SpanBERT"><a href="#2-SpanBERT" class="headerlink" title="2. SpanBERT"></a>2. SpanBERT</h3><p>This paper is presented by Mandar Joshi et al. The authors argue that the original BERT is limited in the problem of generating a sequence of words like MRC tasks. So they gave out a new pretraining method with a new objective: span-boundary objective. The authors firstly sampled a <strong>span length</strong> from a geometric distribution then randomly select the starting point for the span to be masked. </p>
+<p>According to the paper, they masked 15% of the words in the documents as in BERT(replacing 80% of the masked tokens with [MASK], 10% with random tokens, and 10% with the original tokens). However, they performed this replacement at the span level and not for each token individually; that is, all the tokens in a span are replaced with [MASK] or sampled tokens.</p>
+<p>Then they proposed a Span Boundary Objective. Let  $\mathbf{x}$  be the output of BERT and (s,e) is the start and the end position of the span. $\mathbf{p}$ is the position embedding. So the represent of the i-th masked token $\mathbf{y_i}$ is:</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+\mathbf{h}_{0}=\left[\mathbf{x}_{s-1} ; \mathbf{x}_{e+1} ; \mathbf{p}_{i-s+1}\right] \\
+\mathbf{h}_{1}=\text { LayerNorm }\left(\mathrm{GeLU}\left(\mathbf{W}_{1} \mathbf{h}_{0}\right)\right) \\
+\mathbf{y}_{i}=\text { LayerNorm }\left(\mathrm{GeLU}\left(\mathbf{W}_{2} \mathbf{h}_{1}\right)\right)
+\end{array}</script><p>They use  $\mathbf{y_i}$ to compute the probability of the token and use cross-entropy as its loss. So the loss function is the sum of Span Boundary Objective loss and regular masked language loss:</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-p\left(z_{d}=z \mid \vec{z}_{\neg d}, \vec{d}\right) & \propto \\
-\frac{m_{z, \neg d}+\alpha}{D-1+K \alpha} & \frac{\prod_{w \in d}\left(n_{z, \neg d}^{w}+\beta\right)}{\prod_{i=1}^{N_{d}}\left(n_{z, \neg d}+V \beta+i-1\right)}
-\end{aligned}</script><p>where $\vec{z}_{\neg d}$ is means the cluster label of document d is removed from $\vec{z}$ and $K$ is the initial number of clusters. $m_{z,\neg d}$ is the number of documents in table $z$ without considering document $d$. $\alpha$ and $\beta$ is the hyperparameters of the algorithm.</p>
-<p>This first part of this expression is corresponding to rule 1 and the second part is corresponding to rule 2. </p>
-<h4 id="Meaning-of-alpha-and-beta"><a href="#Meaning-of-alpha-and-beta" class="headerlink" title="Meaning of $\alpha$ and $\beta$"></a>Meaning of $\alpha$ and $\beta$</h4><ul>
-<li><p>$\alpha$ controls the probability that a student will join a table that is currently empty When alpha is 0, no one will join an empty table.</p>
-</li>
-<li><p>$\beta$ controls the student’s affinity for other students with similar interests. A low beta means that students desire to sit with students of similar interests. A high beta means they are less concerned with affinity and are more influenced by the popularity of a table</p>
-</li>
+\mathcal{L}\left(x_{i}\right) &=\mathcal{L}_{\mathrm{MLM}}\left(x_{i}\right)+\mathcal{L}_{\mathrm{SBO}}\left(x_{i}\right) \\
+&=-\log P\left(x_{i} \mid \mathbf{x}_{i}\right)-\log P\left(x_{i} \mid \mathbf{y}_{i}\right)
+\end{aligned}</script><p>They also omitted the Next Sentence Prediction objective used in the original BERT since other research showed this function will hurt the performance of BERT by impeding it learning from longer full-length contexts and by adding noise for Masked Language Model objective.</p>
+<p>With this pretraining method, the model has an obvious improvement on extractive QA tasks and other tasks can also benefit a little from this pretraining method</p>
+<h3 id="3-RoBERTa"><a href="#3-RoBERTa" class="headerlink" title="3. RoBERTa"></a>3. RoBERTa</h3><p>This paper is proposed by Yinhan Liu et al, in which they reconstructed the whole BERT training process and find which factors can influence the final result of pretraining, then they proposed a model that summarized all the positive influences that they found call RoBERTa.</p>
+<p>They typically have these findings:</p>
+<ul>
+<li>Using dynamic masking which will generate different patterns every time they feed a sequence to the model can achieve slightly better performance.</li>
+<li>Removing Next Sentence Prediction objective just using a longer sequence that extracted from one document(no cross documents) can have better performance</li>
+<li>Training on large batch size can get better performance</li>
+<li>Though replace character-level representation of the input with Byte-Pair Encoding do not improve the performance even hurt a little, they believe the advantages of a universal encoding scheme outweigh the minor degradation in performance</li>
+<li>They also found <strong>the data and the number of training passes through the data</strong> are two important factors, the authors said with well-designed data and passing through time, the RoBERTa will have better performance than BERT even with the same objective</li>
 </ul>
-<h4 id="Label-Word-Generating-for-Clusters"><a href="#Label-Word-Generating-for-Clusters" class="headerlink" title="Label Word Generating for Clusters"></a>Label Word Generating for Clusters</h4><ul>
-<li>the probability of word $w$ being generated by cluster $z$ is:<script type="math/tex; mode=display">
-\phi_{z, w}=\frac{n_{z}^{w}+\beta}{\sum_{w=1}^{V} n_{z}^{w}+V \beta}</script></li>
+<p>Future work: </p>
+<ul>
+<li>multi-task learning?</li>
+<li>which factor is dominant? Data properties or pre-training objective   </li>
+</ul>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><ul>
+<li><a href="https://arxiv.org/pdf/1909.02209" target="_blank" rel="noopener">Zhang Z, Wu Y, Zhao H, et al. Semantics-aware bert for language understanding[J]. arXiv preprint arXiv:1909.02209, 2019.</a></li>
+<li><a href="https://arxiv.org/pdf/1901.11504" target="_blank" rel="noopener">Liu X, He P, Chen W, et al. Multi-task deep neural networks for natural language understanding[J]. arXiv preprint arXiv:1901.11504, 2019.</a></li>
+<li><a href="https://arxiv.org/pdf/1908.04577" target="_blank" rel="noopener">Wang W, Bi B, Yan M, et al. Structbert: Incorporating language structures into pre-training for deep language understanding[J]. arXiv preprint arXiv:1908.04577, 2019.</a></li>
+<li><a href="https://www.mitpressjournals.org/doi/pdf/10.1162/tacl_a_00300" target="_blank" rel="noopener">Joshi M, Chen D, Liu Y, et al. Spanbert: Improving pre-training by representing and predicting spans[J]. Transactions of the Association for Computational Linguistics, 2020, 8: 64-77.</a></li>
+<li><a href="https://arxiv.org/pdf/1907.11692" target="_blank" rel="noopener">Liu Y, Ott M, Goyal N, et al. Roberta: A robustly optimized bert pretraining approach[J]. arXiv preprint arXiv:1907.11692, 2019.</a></li>
 </ul>
 
     </div>
@@ -424,8 +437,8 @@ p\left(z_{d}=z \mid \vec{z}_{\neg d}, \vec{d}\right) & \propto \\
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2020/08/12/transformer/" rel="next" title="Attention is All You Need Reading Notes">
-                  <i class="fa fa-chevron-left"></i> Attention is All You Need Reading Notes
+                <a href="/2020/08/25/Intention-Recognization/" rel="next" title="Intention Recognization">
+                  <i class="fa fa-chevron-left"></i> Intention Recognization
                 </a>
               
             </div>
@@ -433,10 +446,6 @@ p\left(z_{d}=z \mid \vec{z}_{\neg d}, \vec{d}\right) & \propto \\
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2020/08/25/Intention-Recognization/" rel="prev" title="Intention Recognization">
-                  Intention Recognization <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -485,7 +494,7 @@ p\left(z_{d}=z \mid \vec{z}_{\neg d}, \vec{d}\right) & \propto \\
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Main-Idea"><span class="nav-number">2.</span> <span class="nav-text">Main Idea</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Foundations"><span class="nav-number">3.</span> <span class="nav-text">Foundations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Dirichlet-Multinomial-Mixture"><span class="nav-number">3.0.1.</span> <span class="nav-text">1. Dirichlet Multinomial Mixture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Gibbs-Sampling-for-DMM"><span class="nav-number">3.0.2.</span> <span class="nav-text">2. Gibbs Sampling for DMM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Meaning-of-alpha-and-beta"><span class="nav-number">3.0.2.1.</span> <span class="nav-text">Meaning of $\alpha$ and $\beta$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Label-Word-Generating-for-Clusters"><span class="nav-number">3.0.2.2.</span> <span class="nav-text">Label Word Generating for Clusters</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BERT-as-Encoder"><span class="nav-number">2.</span> <span class="nav-text">BERT as Encoder</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Semantic-aware-BERT-for-Language-Understanding"><span class="nav-number">2.0.1.</span> <span class="nav-text">1. Semantic-aware BERT for Language Understanding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Multi-Task-Deep-Neural-Networks-for-Natural-Language-Understanding"><span class="nav-number">2.0.2.</span> <span class="nav-text">2. Multi-Task Deep Neural Networks for Natural Language Understanding</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Modifying-Pre-training-Objective"><span class="nav-number">3.</span> <span class="nav-text">Modifying Pre-training Objective</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-STRUCTBERT-Incorporating-Language-Structures-Into-Pre-Training-for-Deep-Language-Understanding"><span class="nav-number">3.0.1.</span> <span class="nav-text">1. STRUCTBERT Incorporating Language Structures Into Pre-Training for Deep Language Understanding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-SpanBERT"><span class="nav-number">3.0.2.</span> <span class="nav-text">2. SpanBERT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-RoBERTa"><span class="nav-number">3.0.3.</span> <span class="nav-text">3. RoBERTa</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#References"><span class="nav-number">3.0.4.</span> <span class="nav-text">References</span></a></li></ol></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
